@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class CardGameAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+
   const CardGameAppBar({Key? key, required this.title})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);

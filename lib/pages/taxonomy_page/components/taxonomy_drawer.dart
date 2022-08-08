@@ -64,7 +64,8 @@ class TaxonomyPageDrawer extends StatelessWidget {
                 title: const Text('Cài Đặt'),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(context, SlideLeftRoute(page: const SettingPage()));
+                  Navigator.push(
+                      context, SlideLeftRoute(page: const SettingPage()));
                 },
               ),
               ListTile(

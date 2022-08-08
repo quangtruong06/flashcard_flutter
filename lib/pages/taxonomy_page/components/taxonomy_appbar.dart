@@ -1,9 +1,11 @@
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flutter/material.dart';
 
-
-class TaxonomyPageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const TaxonomyPageAppBar({Key? key}) : preferredSize = const Size.fromHeight(kToolbarHeight), super(key: key);
+class TaxonomyPageAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  const TaxonomyPageAppBar({Key? key})
+      : preferredSize = const Size.fromHeight(kToolbarHeight),
+        super(key: key);
 
   @override
   final Size preferredSize; // default is 56.0
@@ -36,5 +38,4 @@ class TaxonomyPageAppBar extends StatelessWidget implements PreferredSizeWidget 
           ),
         ));
   }
-
 }

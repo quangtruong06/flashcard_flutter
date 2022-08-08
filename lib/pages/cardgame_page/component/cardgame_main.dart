@@ -1,12 +1,17 @@
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/contain/response_api.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
+import 'package:flashcard_flutter/pages/phonemic_game/phonemic_game.dart';
+import 'package:flashcard_flutter/pages/puzzle_game/puzzle_game.dart';
 import 'package:flashcard_flutter/pages/taxonomy_page/model/taxonomy_model.dart';
+import 'package:flashcard_flutter/pages/word_game/word_game.dart';
+import 'package:flashcard_flutter/route_transition/route_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class CardGameBody extends StatefulWidget {
   final TaxonomyModel data;
+
   const CardGameBody({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -15,31 +20,37 @@ class CardGameBody extends StatefulWidget {
 
 class _CardGameBodyState extends State<CardGameBody> {
   Future<List<CardModel>>? cardData;
+
   @override
   void initState() {
     cardData = getCardDataFromAPI(widget.data.taxonomyId!);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<CardModel>>(
         future: cardData,
-        builder: (context,snapshot){
-          if (snapshot.hasData){
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
             var carddata = snapshot.data!;
             final List data = [
               {
                 "name": "Cards",
                 "img": widget.data.imageUrl,
+                "nextpage":PhonemicGame(cardType: widget.data.name!, cardData: carddata,)
               },
               {
                 "name": "Word Game",
                 "img": "assets/images/word_game.png",
+                "nextpage":WordGame()
               },
               {
                 "name": "Puzzle Game",
                 "img": "assets/images/puzzle_game.png",
-              }];
+                "nextpage":PuzzleGame()
+              }
+            ];
             return Center(
               child: CarouselSlider.builder(
                   itemCount: data.length,
@@ -52,15 +63,18 @@ class _CardGameBodyState extends State<CardGameBody> {
                     enableInfiniteScroll: false,
                     autoPlayCurve: Curves.fastOutSlowIn,
                   ),
-                  itemBuilder: (BuildContext context, int itemIndex,
-                      int pageViewIndex) {
+                  itemBuilder:
+                      (BuildContext context, int itemIndex, int pageViewIndex) {
                     return Builder(
                       builder: (BuildContext context) {
                         return GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, SlideRightRoute(page: data[itemIndex]["nextpage"]));
+                          },
                           child: Container(
                               width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 5.0),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(8),
@@ -76,17 +90,17 @@ class _CardGameBodyState extends State<CardGameBody> {
                                 children: [
                                   itemIndex == 0
                                       ? Image.network(
-                                    data[0]["img"],
-                                    width: 200,
-                                    height: 200,
-                                    fit: BoxFit.fill,
-                                  )
+                                          data[0]["img"],
+                                          width: 200,
+                                          height: 200,
+                                          fit: BoxFit.fill,
+                                        )
                                       : Image.asset(
-                                    data[itemIndex]["img"],
-                                    width: 200,
-                                    height: 200,
-                                    fit: BoxFit.fill,
-                                  ),
+                                          data[itemIndex]["img"],
+                                          width: 200,
+                                          height: 200,
+                                          fit: BoxFit.fill,
+                                        ),
                                   const SizedBox(
                                     height: 30.0,
                                   ),
@@ -101,10 +115,9 @@ class _CardGameBodyState extends State<CardGameBody> {
                     );
                   }),
             );
-          }
-          else {
+          } else {
             return const Center(child: CircularProgressIndicator());
           }
-    });
+        });
   }
 }

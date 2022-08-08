@@ -12,7 +12,9 @@ class CardGamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CardGameAppBar(title: data.name),
-      body: CardGameBody(data: data,),
+      body: CardGameBody(
+        data: data,
+      ),
     );
   }
 }
