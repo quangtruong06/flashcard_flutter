@@ -52,7 +52,7 @@ class _SettingPageState extends State<SettingPage> {
             ),
             Container(
               color: Colors.white,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -99,7 +99,7 @@ class _SettingPageState extends State<SettingPage> {
             ),
             Container(
               color: Colors.white,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -124,7 +124,7 @@ class _SettingPageState extends State<SettingPage> {
                   color: Colors.white,
                   border: Border(
                       top: BorderSide(width: 0.5, color: Colors.black12))),
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

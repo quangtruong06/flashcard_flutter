@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class PlayPhonemic extends StatefulWidget {
   final CardModel phonemicData;
@@ -15,17 +15,31 @@ class PlayPhonemic extends StatefulWidget {
 
 class _PlayPhonemicState extends State<PlayPhonemic>
     with TickerProviderStateMixin {
+  final player = AudioPlayer();
   final angle = 180 * pi / 180;
   bool isPlay = false;
   late AnimationController controller;
   late Animation<double> animation;
+
+  init() async {
+    var url = "https://i.vdoc.vn/data/media/Dictionary/bird-us.mp3";
+    await player.setUrl(url);
+  }
 
   @override
   void initState() {
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
     animation = Tween<double>(begin: 0, end: angle).animate(controller);
+    init();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    player.stop();
   }
 
   @override
@@ -34,19 +48,23 @@ class _PlayPhonemicState extends State<PlayPhonemic>
       onTap: () async {
         controller.forward();
         controller.addStatusListener((status) {
-          if (controller.value > 0.8) {
+          if (controller.isCompleted) {
             setState(() {
               isPlay = true;
+              player.play();
             });
-            Future.delayed(const Duration(milliseconds: 500), () {
-              controller.reverse();
-              controller.addStatusListener((status) {
-                if (controller.value < 0.8) {
-                  setState(() {
-                    isPlay = false;
-                  });
-                }
-              });
+            player.playbackEventStream.listen((event) {
+              if (event.processingState == ProcessingState.completed){
+                controller.reverse();
+                controller.addStatusListener((status) {
+                  if (controller.value < 0.8) {
+                    setState(() {
+                      isPlay = false;
+                    });
+                    player.pause();
+                  }
+                });
+              }
             });
           }
         });
