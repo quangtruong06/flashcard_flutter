@@ -22,52 +22,53 @@ class _PlayPhonemicState extends State<PlayPhonemic>
   late Animation<double> animation;
 
   init() async {
-    var url = "https://i.vdoc.vn/data/media/Dictionary/bird-us.mp3";
-    await player.setUrl(url);
+    var url = widget.phonemicData.mediaUrl;
+    await player.setUrl(url!);
   }
-
   @override
   void initState() {
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 400));
     animation = Tween<double>(begin: 0, end: angle).animate(controller);
     init();
+    playPhonemic();
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     player.stop();
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        controller.forward();
-        controller.addStatusListener((status) {
-          if (controller.isCompleted) {
-            setState(() {
-              isPlay = true;
-              player.play();
-            });
-            player.playbackEventStream.listen((event) {
-              if (event.processingState == ProcessingState.completed){
-                controller.reverse();
-                controller.addStatusListener((status) {
-                  if (controller.value < 0.8) {
-                    setState(() {
-                      isPlay = false;
-                    });
-                    player.pause();
-                  }
+  void playPhonemic(){
+    controller.forward();
+    controller.addStatusListener((status) {
+      if (controller.isCompleted) {
+        setState(() {
+          isPlay = true;
+          player.play();
+        });
+        player.playbackEventStream.listen((event) {
+          if (event.processingState == ProcessingState.completed) {
+            controller.reverse();
+            controller.addStatusListener((status) {
+              if (controller.value < 0.8) {
+                setState(() {
+                  isPlay = false;
                 });
+                player.pause();
               }
             });
           }
         });
+      }
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        playPhonemic();
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
