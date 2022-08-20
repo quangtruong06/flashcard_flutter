@@ -1,10 +1,9 @@
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flutter/material.dart';
 
-class CardGameAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ShareAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-
-  const CardGameAppBar({Key? key, required this.title})
+  const ShareAppBar({Key? key, required this.title})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
 

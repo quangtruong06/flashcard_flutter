@@ -38,6 +38,7 @@ class _PlayPhonemicState extends State<PlayPhonemic>
   @override
   void dispose() {
     super.dispose();
+    controller.dispose();
     player.stop();
   }
   void playPhonemic(){
@@ -51,7 +52,7 @@ class _PlayPhonemicState extends State<PlayPhonemic>
         player.playbackEventStream.listen((event) {
           if (event.processingState == ProcessingState.completed) {
             controller.reverse();
-            controller.addStatusListener((status) {
+            controller.addStatusListener((status){
               if (controller.value < 0.8) {
                 setState(() {
                   isPlay = false;

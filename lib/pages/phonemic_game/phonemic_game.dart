@@ -1,6 +1,7 @@
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flashcard_flutter/pages/phonemic_game/component/phonemic_game_appbar.dart';
 import 'package:flashcard_flutter/pages/phonemic_game/component/phonemic_game_main.dart';
+
 import 'package:flutter/material.dart';
 
 class PhonemicGame extends StatelessWidget {
@@ -16,7 +17,7 @@ class PhonemicGame extends StatelessWidget {
       appBar: PhonemicGameAppBar(
         cardType: cardType,
       ),
-      body: PhonemicGameBody(size: size, cardData: cardData,),
+      body: PhonemicGameBody(cardData: cardData, size: size,),
     );
   }
 }

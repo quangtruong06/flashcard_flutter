@@ -43,12 +43,12 @@ class _CardGameBodyState extends State<CardGameBody> {
               {
                 "name": "Word Game",
                 "img": "assets/images/word_game.png",
-                "nextpage":const WordGame()
+                "nextpage": WordGame(cardType: widget.data.name!, cardData: carddata,)
               },
               {
                 "name": "Puzzle Game",
                 "img": "assets/images/puzzle_game.png",
-                "nextpage":const PuzzleGame()
+                "nextpage": PuzzleGame(cardType: widget.data.name!, cardData: carddata,)
               }
             ];
             return Center(
