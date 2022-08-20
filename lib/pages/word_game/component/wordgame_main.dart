@@ -36,7 +36,7 @@ class WordGameBody extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            Positioned(child: PlayAudio(data: cardData[index])),
+                            Positioned(child: PlayAudio(url: cardData[index].mediaUrl!)),
                             Positioned.fill(
                                 child: Align(
                                     alignment: Alignment.center,

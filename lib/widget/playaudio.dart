@@ -1,12 +1,11 @@
 import 'dart:math';
 
-import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class PlayAudio extends StatefulWidget {
-  const PlayAudio({Key? key, required this.data}) : super(key: key);
-  final CardModel data;
+  const PlayAudio({Key? key, required this.url}) : super(key: key);
+  final String url;
 
   @override
   State<PlayAudio> createState() => _PlayAudioState();
@@ -19,8 +18,7 @@ class _PlayAudioState extends State<PlayAudio> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
   init() async {
-    var url = widget.data.mediaUrl;
-    await player.setUrl(url!);
+    await player.setUrl(widget.url);
   }
   @override
   void initState() {
