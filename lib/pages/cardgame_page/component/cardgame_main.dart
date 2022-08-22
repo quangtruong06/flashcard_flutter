@@ -32,6 +32,9 @@ class _CardGameBodyState extends State<CardGameBody> {
     return FutureBuilder<List<CardModel>>(
         future: cardData,
         builder: (context, snapshot) {
+          print("hasData:${snapshot.hasData}");
+          print("hasError:${snapshot.hasError}");
+          print("error:${snapshot.error}");
           if (snapshot.hasData) {
             var carddata = snapshot.data!;
             final List data = [
