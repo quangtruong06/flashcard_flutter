@@ -53,7 +53,7 @@ class _PlayAudioState extends State<PlayAudio> with TickerProviderStateMixin {
                 setState(() {
                   isPlay = false;
                 });
-                player.pause();
+                player.stop();
               }
             });
           }
