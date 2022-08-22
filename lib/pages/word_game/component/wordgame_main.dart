@@ -3,11 +3,14 @@ import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flashcard_flutter/widget/playaudio.dart';
 import 'package:flutter/material.dart';
+
 class WordGameBody extends StatelessWidget {
   final Size size;
   final List<CardModel> cardData;
+
   const WordGameBody({Key? key, required this.size, required this.cardData})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +39,9 @@ class WordGameBody extends StatelessWidget {
                       children: [
                         Stack(
                           children: [
-                            Positioned(child: PlayAudio(url: cardData[index].mediaUrl!)),
+                            Positioned(
+                                child:
+                                    PlayAudio(url: cardData[index].mediaUrl!)),
                             Positioned.fill(
                                 child: Align(
                                     alignment: Alignment.center,

@@ -34,6 +34,9 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
       child: FutureBuilder<List<TaxonomyModel>>(
           future: taxonomy,
           builder: (context, snapshot) {
+            print("hasData:${snapshot.hasData}");
+            print("hasError:${snapshot.hasError}");
+            print("error:${snapshot.error}");
             if (snapshot.hasData) {
               List<TaxonomyModel> data = snapshot.data!;
               return GridView.builder(
