@@ -10,7 +10,6 @@ class WordGameBody extends StatelessWidget {
 
   const WordGameBody({Key? key, required this.size, required this.cardData})
       : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,7 +50,8 @@ class WordGameBody extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                         size: 20.0)))
                           ],
-                        )
+                        ),
+                        ChooseTheAnswer(),
                       ],
                     ),
                   );
