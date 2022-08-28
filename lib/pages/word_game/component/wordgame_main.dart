@@ -5,12 +5,17 @@ import 'package:flashcard_flutter/widget/nextbar.dart';
 import 'package:flashcard_flutter/widget/playaudio.dart';
 import 'package:flutter/material.dart';
 
-class WordGameBody extends StatelessWidget {
+class WordGameBody extends StatefulWidget {
   final Size size;
   final List<CardModel> cardData;
-  bool isNext=false;
   WordGameBody({Key? key, required this.size, required this.cardData})
       : super(key: key);
+  bool isNext=false;
+  @override
+  State<WordGameBody> createState() => _WordGameBodyState();
+}
+
+class _WordGameBodyState extends State<WordGameBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,12 +38,12 @@ class WordGameBody extends StatelessWidget {
                         children: [
                           Positioned(
                               child: PlayAudio(
-                                  url: cardData[index].mediaUrl!)),
+                                  url: widget.cardData[index].mediaUrl!)),
                           Positioned.fill(
                               child: Align(
                                   alignment: Alignment.center,
                                   child: Utils.customText(
-                                      text: cardData[index].name,
+                                      text: widget.cardData[index].name,
                                       color: Colors.orange,
                                       fontWeight: FontWeight.bold,
                                       size: 20.0)))
@@ -46,18 +51,18 @@ class WordGameBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 50),
                       ChooseTheAnswer(
-                        cardData: cardData,
-                        trueSelect: cardData[index].imageUrl!,
-                        size: size,
-                        isNext: isNext,
+                        cardData: widget.cardData,
+                        trueSelect: widget.cardData[index].imageUrl!,
+                        size: widget.size,
+                        isNext: widget.isNext,
                       ),
                       const Spacer(),
-                      NextBar(size: size, isNext: isNext)
+                      NextBar(size: widget.size, isNext: widget.isNext)
                     ],
                   ),
                 );
               },
-              itemCount: cardData.length,
+              itemCount: widget.cardData.length,
             ),
           )
         ],
