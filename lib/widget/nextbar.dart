@@ -9,7 +9,6 @@ class NextBar extends StatefulWidget {
 
   final Size size;
   final bool isNext;
-
   @override
   State<NextBar> createState() => _NextBarState();
 }

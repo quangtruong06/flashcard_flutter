@@ -7,14 +7,14 @@ class ChooseTheAnswer extends StatefulWidget {
   final Size size;
   final List<CardModel> cardData;
   final String trueSelect;
-  bool isNext;
+  final void nextQuestions;
 
-  ChooseTheAnswer(
+  const ChooseTheAnswer(
       {Key? key,
       required this.cardData,
       required this.trueSelect,
-      required this.isNext,
-      required this.size})
+      required this.size,
+      required this.nextQuestions})
       : super(key: key);
 
   @override
@@ -26,6 +26,16 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
   bool? yourResultIs;
   List<String> theSelect = [];
   bool isShowResult = false;
+  bool isClicked=true;
+  youAnswered(int index) {
+    if (isClicked) {
+      tappedIndex = index;
+      isShowResult = true;
+      checkYourResult(tappedIndex!);
+      widget.nextQuestions;
+      isClicked = false;
+    }
+  }
 
   getRandomImage() {
     theSelect = [];
@@ -111,10 +121,7 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
           return GestureDetector(
               onTap: () {
                 setState(() {
-                  tappedIndex = index;
-                  isShowResult = true;
-                  checkYourResult(tappedIndex!);
-                  widget.isNext = true;
+                  youAnswered(index);
                 });
               },
               child: Container(
