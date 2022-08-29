@@ -7,7 +7,7 @@ class ChooseTheAnswer extends StatefulWidget {
   final Size size;
   final List<CardModel> cardData;
   final String trueSelect;
-  final void nextQuestions;
+  final Function nextQuestions;
 
   const ChooseTheAnswer(
       {Key? key,
@@ -26,17 +26,16 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
   bool? yourResultIs;
   List<String> theSelect = [];
   bool isShowResult = false;
-  bool isClicked=true;
+  bool isClicked=false;
   youAnswered(int index) {
-    if (isClicked) {
+    if (isClicked==false) {
       tappedIndex = index;
       isShowResult = true;
+      widget.nextQuestions();
       checkYourResult(tappedIndex!);
-      widget.nextQuestions;
-      isClicked = false;
+      isClicked = true;
     }
   }
-
   getRandomImage() {
     theSelect = [];
     theSelect.add(widget.trueSelect);

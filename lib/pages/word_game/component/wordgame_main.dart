@@ -21,7 +21,6 @@ class WordGameBody extends StatefulWidget {
 class _WordGameBodyState extends State<WordGameBody> {
   final PageController _pageController = PageController();
   bool isNext = false;
-
   nextQuestion() {
     setState(() {
       isNext = true;
@@ -29,7 +28,6 @@ class _WordGameBodyState extends State<WordGameBody> {
   }
   @override
   Widget build(BuildContext context) {
-    print("aaaaaaaaaaaaaa${isNext}");
     return Container(
       padding: const EdgeInsets.all(8),
       child: Column(
@@ -39,13 +37,12 @@ class _WordGameBodyState extends State<WordGameBody> {
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                void nextPage() {
+                nextPage() {
                   _pageController.animateToPage(
                       _pageController.page!.toInt() + 1,
                       duration: const Duration(milliseconds: 100),
                       curve: Curves.easeIn);
                 }
-
                 return Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -77,7 +74,7 @@ class _WordGameBodyState extends State<WordGameBody> {
                         nextQuestions: nextQuestion,
                       ),
                       const Spacer(),
-                      NextBar(size: widget.size, isNext: isNext)
+                      NextBar(size: widget.size, isNext: isNext, nextQuestion: nextPage,)
                     ],
                   ),
                 );
