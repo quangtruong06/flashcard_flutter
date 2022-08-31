@@ -5,6 +5,7 @@ import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart'
 import 'package:flashcard_flutter/pages/word_game/component/choose_answer.dart';
 import 'package:flashcard_flutter/widget/nextbar.dart';
 import 'package:flashcard_flutter/widget/playaudio.dart';
+import 'package:flashcard_flutter/widget/score_dot.dart';
 import 'package:flutter/material.dart';
 
 class WordGameBody extends StatefulWidget {
@@ -19,12 +20,29 @@ class WordGameBody extends StatefulWidget {
 }
 
 class _WordGameBodyState extends State<WordGameBody> {
+  List<bool> scoreDots = [];
   final PageController _pageController = PageController();
   bool isNext = false;
-  nextQuestion() {
+  bool? yourResultIs;
+  checkResult(bool? yourResult){
+    setState(() {
+      scoreDots.add(yourResult!);
+    });
+  }
+  runNextQuestion() {
     setState(() {
       isNext = true;
     });
+  }
+  stopNextQuestion(){
+    setState(() {
+      isNext = false;
+    });
+  }
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -40,7 +58,7 @@ class _WordGameBodyState extends State<WordGameBody> {
                 nextPage() {
                   _pageController.animateToPage(
                       _pageController.page!.toInt() + 1,
-                      duration: const Duration(milliseconds: 100),
+                      duration: const Duration(milliseconds: 400),
                       curve: Curves.easeIn);
                 }
                 return Container(
@@ -66,15 +84,15 @@ class _WordGameBodyState extends State<WordGameBody> {
                                       size: 20.0)))
                         ],
                       ),
-                      const SizedBox(height: 50),
+                      ScoreDot(scoreDot: scoreDots,),
                       ChooseTheAnswer(
                         cardData: widget.cardData,
                         trueSelect: widget.cardData[index].imageUrl!,
                         size: widget.size,
-                        nextQuestions: nextQuestion,
+                        nextQuestions: runNextQuestion, checkResult: checkResult,
                       ),
                       const Spacer(),
-                      NextBar(size: widget.size, isNext: isNext, nextQuestion: nextPage,)
+                      NextBar(size: widget.size, isNext: isNext, nextPage: nextPage, stopNextQuestion: stopNextQuestion,)
                     ],
                   ),
                 );

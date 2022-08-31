@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flutter/material.dart';
 
@@ -8,13 +9,15 @@ class ChooseTheAnswer extends StatefulWidget {
   final List<CardModel> cardData;
   final String trueSelect;
   final Function nextQuestions;
+  final Function checkResult;
 
   const ChooseTheAnswer(
       {Key? key,
       required this.cardData,
       required this.trueSelect,
       required this.size,
-      required this.nextQuestions})
+      required this.nextQuestions,
+      required this.checkResult})
       : super(key: key);
 
   @override
@@ -23,19 +26,21 @@ class ChooseTheAnswer extends StatefulWidget {
 
 class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
   int? tappedIndex;
-  bool? yourResultIs;
   List<String> theSelect = [];
   bool isShowResult = false;
-  bool isClicked=false;
+  bool isClicked = false;
+
   youAnswered(int index) {
-    if (isClicked==false) {
+    if (isClicked == false) {
       tappedIndex = index;
       isShowResult = true;
       widget.nextQuestions();
-      checkYourResult(tappedIndex!);
       isClicked = true;
+      playAudioResult(theSelect[tappedIndex!] == widget.trueSelect);
+      widget.checkResult(theSelect[tappedIndex!] == widget.trueSelect);
     }
   }
+
   getRandomImage() {
     theSelect = [];
     theSelect.add(widget.trueSelect);
@@ -49,14 +54,6 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
     }
     // print(object)
     theSelect.shuffle();
-  }
-
-  void checkYourResult(int tappedIndex) {
-    if (theSelect[tappedIndex] == widget.trueSelect) {
-      yourResultIs = true;
-    } else {
-      yourResultIs = false;
-    }
   }
 
   double showYourResult(int yourSelect) {

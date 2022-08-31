@@ -70,6 +70,9 @@ flutter:
   assets:
     - assets/images/word_game.png
     - assets/images/puzzle_game.png
+    - assets/images/win.png
+    - assets/audios/exactly.mp3
+    - assets/audios/fail.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

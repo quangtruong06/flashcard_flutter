@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class Utils {
   static Widget customText({
@@ -24,5 +25,15 @@ class Utils {
       maxLines: line,
       overflow: TextOverflow.ellipsis,
     );
+  }
+}
+void playAudioResult(bool yourResult){
+  final player = AudioPlayer();
+  if(yourResult==true){
+    player.setAsset("assets/audios/exactly.mp3");
+    player.play();
+  }else{
+    player.setAsset("assets/audios/fail.mp3");
+    player.play();
   }
 }
