@@ -67,7 +67,6 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
           : 0.0;
     }
   }
-
   Widget resultIcon(int yourSelect) {
     if (theSelect[yourSelect] == widget.trueSelect) {
       return Container(
