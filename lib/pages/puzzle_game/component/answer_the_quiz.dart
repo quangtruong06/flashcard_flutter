@@ -42,12 +42,15 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    yourAnswer = List.filled(widget.trueAnswer.trim().split("").length, "");
+    yourAnswer = List.filled(
+        widget.trueAnswer.trim().split("").length,{"answer": "","index": 0});
     getRandomAlphabet();
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 600));
-    animation = Tween(begin: 0.0, end: 1.0).animate(controller)..addListener(() {setState(() {
-    });});
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      });
     super.initState();
   }
 
@@ -56,26 +59,26 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  fillAnswer(String chooseAlphabet) {
-    var unAnswer = yourAnswer.indexWhere((element) => element == "");
+  fillAnswer(String chooseAlphabet, int index) {
+    var unAnswer = yourAnswer.indexWhere((element) => element["answer"] == "");
     setState(() {
-      yourAnswer[unAnswer] = chooseAlphabet;
+      yourAnswer[unAnswer]["answer"] = chooseAlphabet;
+      yourAnswer[unAnswer]["index"] = index;
       isClicked = true;
     });
   }
 
-  returnAlphabet(String answeredAlphabet) {
-    var answered = quizRandomAlphabet.indexWhere((element) => element == "");
+  returnAlphabet(String answeredAlphabet, int index) {
     setState(() {
-      quizRandomAlphabet[answered] = answeredAlphabet;
+      quizRandomAlphabet[index] = answeredAlphabet;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (yourAnswer.contains("") == false) {
-      controller.forward();
-    }
+    // if (yourAnswer.contains("") == false) {
+    //   controller.forward();
+    // }
     return Column(
       children: [
         Padding(
@@ -102,9 +105,10 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                   child: Card(
                     child: InkWell(
                       onTap: () {
-                        returnAlphabet(yourAnswer[index]);
+                        returnAlphabet(yourAnswer[index]["answer"],
+                            yourAnswer[index]["index"]);
                         setState(() {
-                          yourAnswer[index] = "";
+                          yourAnswer[index]["answer"] = "";
                         });
                       },
                       child: animation.value < 0.5
@@ -152,7 +156,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           opacity: controller.isAnimating ? 0.0 : 1.0,
                           duration: const Duration(milliseconds: 100),
                           child: Utils.customText(
-                              text: yourAnswer[index],
+                              text: yourAnswer[index]["answer"],
                               color: Colors.green,
                               fontWeight: FontWeight.bold,
                               size: 20.0),
@@ -171,7 +175,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
             children: List.generate(quizRandomAlphabet.length, (index) {
               return InkWell(
                 onTap: () {
-                  fillAnswer(quizRandomAlphabet[index]);
+                  fillAnswer(quizRandomAlphabet[index], index);
                   clickedAlphabet(index);
                 },
                 child: AnimatedOpacity(
