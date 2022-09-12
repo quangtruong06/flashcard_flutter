@@ -60,25 +60,27 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   }
 
   fillAnswer(String chooseAlphabet, int index) {
-    var unAnswer = yourAnswer.indexWhere((element) => element["answer"] == "");
+    var unAnswer = yourAnswer.indexWhere((element) => element["answer"]=="");
     setState(() {
       yourAnswer[unAnswer]["answer"] = chooseAlphabet;
       yourAnswer[unAnswer]["index"] = index;
       isClicked = true;
     });
   }
-
   returnAlphabet(String answeredAlphabet, int index) {
     setState(() {
       quizRandomAlphabet[index] = answeredAlphabet;
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    // if (yourAnswer.contains("") == false) {
-    //   controller.forward();
-    // }
+    for(Map map in yourAnswer){
+      if(map.containsKey("answer")){
+        if(map["answer"]!=""){
+          controller.forward();
+        }
+      }
+    }
     return Column(
       children: [
         Padding(
