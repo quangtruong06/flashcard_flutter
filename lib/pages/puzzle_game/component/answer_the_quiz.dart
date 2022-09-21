@@ -10,21 +10,26 @@ class PlayQuiz extends StatefulWidget {
   @override
   State<PlayQuiz> createState() => _PlayQuizState();
 }
-
 class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation animation;
   List yourAnswer = [];
   List quizRandomAlphabet = [];
   bool isClicked = false;
-
+  bool checkYourAnswer(){
+    if (yourAnswer.join()==widget.trueAnswer.trim()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   clickedAlphabet(int index) {
     setState(() {
       isClicked = true;
       quizRandomAlphabet[index] = "";
     });
   }
-
   getRandomAlphabet() {
     quizRandomAlphabet = [];
     final List trueAlphabet = widget.trueAnswer.trim().toUpperCase().split("");
@@ -39,26 +44,6 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     quizRandomAlphabet = list.expand((element) => element).toList();
     quizRandomAlphabet.shuffle();
   }
-
-  @override
-  void initState() {
-    yourAnswer = List.filled(
-        widget.trueAnswer.trim().split("").length,{"answer": "","index": 0});
-    getRandomAlphabet();
-    controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 600));
-    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
-      ..addListener(() {
-        setState(() {});
-      });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   fillAnswer(String chooseAlphabet, int index) {
     var unAnswer = yourAnswer.indexWhere((element) => element["answer"]=="");
     setState(() {
@@ -71,6 +56,23 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     setState(() {
       quizRandomAlphabet[index] = answeredAlphabet;
     });
+  }
+  @override
+  void initState() {
+    yourAnswer = List.filled(
+        widget.trueAnswer.trim().split("").length,{"answer": "","index": 0});
+    getRandomAlphabet();
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 800));
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      });
+    super.initState();
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                               height: 40,
                               width: 30,
                               decoration: BoxDecoration(
-                                  color: Colors.grey,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(3),
                                   border: Border.all(
                                       color: Colors.black26, width: 0.5),
@@ -159,7 +161,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           duration: const Duration(milliseconds: 100),
                           child: Utils.customText(
                               text: yourAnswer[index]["answer"],
-                              color: Colors.green,
+                              color: checkYourAnswer()? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
                               size: 20.0),
                         )))
