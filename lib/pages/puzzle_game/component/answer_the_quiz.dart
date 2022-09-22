@@ -16,13 +16,16 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   List yourAnswer = [];
   List quizRandomAlphabet = [];
   bool isClicked = false;
-  bool checkYourAnswer(){
-    if (yourAnswer.join()==widget.trueAnswer.trim()){
-      return true;
-    }
-    else{
-      return false;
-    }
+  bool yourAnswerIs = false;
+  checkYourAnswer(){
+    setState(() {
+      if (yourAnswer.join()==widget.trueAnswer.trim()){
+        yourAnswerIs = true;
+      }
+      else{
+        yourAnswerIs = false;
+      }
+    });
   }
   clickedAlphabet(int index) {
     setState(() {
@@ -79,6 +82,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     for(Map map in yourAnswer){
       if(map.containsKey("answer")){
         if(map["answer"]!=""){
+          checkYourAnswer();
           controller.forward();
         }
       }
@@ -161,7 +165,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           duration: const Duration(milliseconds: 100),
                           child: Utils.customText(
                               text: yourAnswer[index]["answer"],
-                              color: checkYourAnswer()? Colors.green : Colors.red,
+                              color: yourAnswerIs!? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
                               size: 20.0),
                         )))
