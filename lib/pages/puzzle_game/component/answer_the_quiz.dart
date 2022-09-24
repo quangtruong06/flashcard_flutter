@@ -165,7 +165,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           duration: const Duration(milliseconds: 100),
                           child: Utils.customText(
                               text: yourAnswer[index]["answer"],
-                              color: yourAnswerIs!? Colors.green : Colors.red,
+                              color: yourAnswerIs? Colors.green : Colors.red,
                               fontWeight: FontWeight.bold,
                               size: 20.0),
                         )))
