@@ -24,7 +24,10 @@ class LastPage extends StatelessWidget {
             Utils.customText(text: title!,fontWeight: FontWeight.bold,color: const Color(0xFF3254AC),size: 20.0),
             const SizedBox(height: 20,),
             Image.asset(imageSrc!,width: 30,),
-            Utils.customText(text: description!),
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Utils.customText(text: description!,fontWeight: FontWeight.bold,size: 18.0),
+            ),
             const SizedBox(height: 20,),
             Container(
               height: 40,

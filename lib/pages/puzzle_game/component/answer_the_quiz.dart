@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class PlayQuiz extends StatefulWidget {
   final String trueAnswer;
-
-  const PlayQuiz({Key? key, required this.trueAnswer}) : super(key: key);
+  final Function nextQuestions;
+  final Function checkResult;
+  const PlayQuiz({Key? key, required this.trueAnswer, required this.nextQuestions, required this.checkResult}) : super(key: key);
 
   @override
   State<PlayQuiz> createState() => _PlayQuizState();
@@ -13,16 +14,18 @@ class PlayQuiz extends StatefulWidget {
 class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation animation;
+  bool isFullAnswered = false;
   List yourAnswer = [];// kết quả
   List quizRandomAlphabet = []; //random list abc
   List listAnswer = [];
   bool isClicked = false;
   bool yourAnswerIs = false;
+
   checkYourAnswer() {
     String answer = "";
-    yourAnswer.forEach((element) {
+    for (var element in yourAnswer) {
       answer += element["answer"];
-    });
+    }
     if (answer.toUpperCase() == widget.trueAnswer.trim().toUpperCase()) {
       setState(() {
         yourAnswerIs = true;
@@ -99,7 +102,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 16.0),
           child: Wrap(
             spacing: 10,
             runSpacing: 8,
@@ -160,13 +163,15 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                 Positioned.fill(
                     child: InkWell(
                       onTap: (){
-                        var item = yourAnswer[index];
-                        if(item["index"] > -1){
-                          setState(() {
-                            quizRandomAlphabet[item["index"]] = item["answer"];
-                            yourAnswer[index]["answer"] = "";
-                            yourAnswer[index]["index"] = -1;
-                          });
+                        if(!isFullAnswered){
+                          var item = yourAnswer[index];
+                          if(item["index"] > -1){
+                            setState(() {
+                              quizRandomAlphabet[item["index"]] = item["answer"];
+                              yourAnswer[index]["answer"] = "";
+                              yourAnswer[index]["index"] = -1;
+                            });
+                          }
                         }
                       },
                       child: Align(
@@ -176,7 +181,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                             duration: const Duration(milliseconds: 100),
                             child: Utils.customText(
                                 text: yourAnswer[index]["answer"],
-                                color: yourAnswerIs? Colors.green : Colors.red,
+                                color: isFullAnswered?(yourAnswerIs? Colors.green : Colors.red) : Colors.black,
                                 fontWeight: FontWeight.bold,
                                 size: 20.0),
                           )),
@@ -195,15 +200,20 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
             children: List.generate(quizRandomAlphabet.length, (index) {
               return InkWell(
                 onTap: () {
-                  fillAnswer(quizRandomAlphabet[index], index);
-                  clickedAlphabet(index);
-                  var isCheckFull = yourAnswer.where((element) => element["answer"] !="").length == yourAnswer.length ;
-                  if(isCheckFull){
-                    checkYourAnswer();
-                    controller.forward();
-
+                  if(!isFullAnswered){
+                    fillAnswer(quizRandomAlphabet[index], index);
+                    clickedAlphabet(index);
+                    var isCheckFull = yourAnswer.where((element) => element["answer"] !="").length == yourAnswer.length ;
+                    if(isCheckFull){
+                      controller.forward();
+                      checkYourAnswer();
+                      widget.checkResult(yourAnswerIs);
+                      setState(() {
+                        isFullAnswered= true;
+                      });
+                      widget.nextQuestions();
+                    }
                   }
-
                 },
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),

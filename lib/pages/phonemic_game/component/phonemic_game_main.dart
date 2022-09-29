@@ -1,6 +1,8 @@
+import 'package:flashcard_flutter/contain/Globals.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flashcard_flutter/pages/phonemic_game/component/playPhonemic.dart';
 import 'package:flashcard_flutter/pages/phonemic_game/component/playRecord.dart';
+import 'package:flashcard_flutter/widget/lastpage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -32,34 +34,40 @@ class PhonemicGameBody extends StatelessWidget {
             itemBuilder: (BuildContext context, int index, int realIndex) {
               return Builder(
                 builder: (BuildContext context) {
-                  return Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: Colors.black26)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          height: size.height / 2.5,
-                          child: Image.network(cardData[index].imageUrl!),
-                        ),
-                        PlayPhonemic(phonemicData: cardData[index]),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        HtmlWidget(cardData[index].description!,
-                            textStyle: const TextStyle(
-                                color: Colors.black, fontSize: 20)),
-                         const Expanded(child: PlayRecord())
-                      ],
-                    ),
-                  );
+                  if(index==cardData.length){
+                    final PhonemicLastPageData data = PhonemicLastPageData();
+                    return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description);
+                  }
+                  else{
+                    return Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(color: Colors.black26)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            height: size.height / 2.5,
+                            child: Image.network(cardData[index].imageUrl!),
+                          ),
+                          PlayPhonemic(phonemicData: cardData[index]),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          HtmlWidget(cardData[index].description!,
+                              textStyle: const TextStyle(
+                                  color: Colors.black, fontSize: 20)),
+                          const Expanded(child: PlayRecord())
+                        ],
+                      ),
+                    );
+                  }
                 },
               );
             },
-            itemCount: cardData.length,
+            itemCount: cardData.length+1,
           ),
         ],
       ),

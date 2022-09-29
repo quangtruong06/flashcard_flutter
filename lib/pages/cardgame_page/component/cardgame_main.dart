@@ -1,4 +1,3 @@
-import 'package:flashcard_flutter/contain/Globals.dart';
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/contain/response_api.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
