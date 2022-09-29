@@ -55,7 +55,7 @@ class _CardGameBodyState extends State<CardGameBody> {
             ];
             return Center(
               child: CarouselSlider.builder(
-                  itemCount: data.length+1,
+                  itemCount: data.length,
                   options: CarouselOptions(
                     aspectRatio: 16 / 17,
                     autoPlay: false,
@@ -69,10 +69,6 @@ class _CardGameBodyState extends State<CardGameBody> {
                       (BuildContext context, int itemIndex, int pageViewIndex) {
                     return Builder(
                       builder: (BuildContext context) {
-                        if(itemIndex==data.length){
-                          return LastPage(title: CardGameLastPageData().tittle, imageSrc: CardGameLastPageData().imageSrc, description: CardGameLastPageData().description);
-                        }
-                        else{
                           return GestureDetector(
                             onTap: (){
                               Navigator.push(context, SlideRightRoute(page: data[itemIndex]["nextpage"]));
@@ -117,7 +113,6 @@ class _CardGameBodyState extends State<CardGameBody> {
                                   ],
                                 )),
                           );
-                        }
                       },
                     );
                   }),

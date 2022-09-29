@@ -13,19 +13,26 @@ class PlayQuiz extends StatefulWidget {
 class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   late AnimationController controller;
   late Animation animation;
-  List yourAnswer = [];
-  List quizRandomAlphabet = [];
+  List yourAnswer = [];// kết quả
+  List quizRandomAlphabet = []; //random list abc
+  List listAnswer = [];
   bool isClicked = false;
   bool yourAnswerIs = false;
-  checkYourAnswer(){
-    setState(() {
-      if (yourAnswer.join()==widget.trueAnswer.trim()){
-        yourAnswerIs = true;
-      }
-      else{
-        yourAnswerIs = false;
-      }
+  checkYourAnswer() {
+    String answer = "";
+    yourAnswer.forEach((element) {
+      answer += element["answer"];
     });
+    if (answer.toUpperCase() == widget.trueAnswer.trim().toUpperCase()) {
+      setState(() {
+        yourAnswerIs = true;
+      });
+    }
+    else {
+     setState(() {
+       yourAnswerIs = false;
+     });
+    }
   }
   clickedAlphabet(int index) {
     setState(() {
@@ -57,13 +64,17 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   }
   returnAlphabet(String answeredAlphabet, int index) {
     setState(() {
-      quizRandomAlphabet[index] = answeredAlphabet;
+
     });
   }
   @override
   void initState() {
-    yourAnswer = List.filled(
-        widget.trueAnswer.trim().split("").length,{"answer": "","index": 0});
+    for(var i = 0;i< widget.trueAnswer.trim().split("").length;i++){
+      yourAnswer.add({
+        "answer": "",
+        "index": -1
+      });
+    }
     getRandomAlphabet();
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 800));
@@ -73,20 +84,18 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
       });
     super.initState();
   }
+  void initData(){
+    setState(() {
+      yourAnswer = List.filled(
+          widget.trueAnswer.trim().split("").length,{"answer": "","index": -1});
+    });
+  }
   @override
   void dispose() {
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
-    for(Map map in yourAnswer){
-      if(map.containsKey("answer")){
-        if(map["answer"]!=""){
-          checkYourAnswer();
-          controller.forward();
-        }
-      }
-    }
     return Column(
       children: [
         Padding(
@@ -111,64 +120,67 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                     );
                   },
                   child: Card(
-                    child: InkWell(
-                      onTap: () {
-                        returnAlphabet(yourAnswer[index]["answer"],
-                            yourAnswer[index]["index"]);
-                        setState(() {
-                          yourAnswer[index]["answer"] = "";
-                        });
-                      },
-                      child: animation.value < 0.5
-                          ? Container(
-                              height: 40,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                      color: Colors.black26, width: 0.5),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(2, 3),
-                                      blurRadius: 3,
-                                      spreadRadius: 1,
-                                    )
-                                  ]),
+                    child: animation.value < 0.5
+                        ? Container(
+                      height: 40,
+                      width: 30,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(3),
+                          border: Border.all(
+                              color: Colors.black26, width: 0.5),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 3),
+                              blurRadius: 3,
+                              spreadRadius: 1,
                             )
-                          : Container(
-                              height: 40,
-                              width: 30,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(3),
-                                  border: Border.all(
-                                      color: Colors.black26, width: 0.5),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      offset: Offset(2, 3),
-                                      blurRadius: 3,
-                                      spreadRadius: 1,
-                                    )
-                                  ]),
-                            ),
+                          ]),
+                    )
+                        : Container(
+                      height: 40,
+                      width: 30,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(3),
+                          border: Border.all(
+                              color: Colors.black26, width: 0.5),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(2, 3),
+                              blurRadius: 3,
+                              spreadRadius: 1,
+                            )
+                          ]),
                     ),
                   ),
                 ),
                 Positioned.fill(
-                    child: Align(
-                        alignment: Alignment.center,
-                        child: AnimatedOpacity(
-                          opacity: controller.isAnimating ? 0.0 : 1.0,
-                          duration: const Duration(milliseconds: 100),
-                          child: Utils.customText(
-                              text: yourAnswer[index]["answer"],
-                              color: yourAnswerIs? Colors.green : Colors.red,
-                              fontWeight: FontWeight.bold,
-                              size: 20.0),
-                        )))
+                    child: InkWell(
+                      onTap: (){
+                        var item = yourAnswer[index];
+                        if(item["index"] > -1){
+                          setState(() {
+                            quizRandomAlphabet[item["index"]] = item["answer"];
+                            yourAnswer[index]["answer"] = "";
+                            yourAnswer[index]["index"] = -1;
+                          });
+                        }
+                      },
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: AnimatedOpacity(
+                            opacity: controller.isAnimating ? 0.0 : 1.0,
+                            duration: const Duration(milliseconds: 100),
+                            child: Utils.customText(
+                                text: yourAnswer[index]["answer"],
+                                color: yourAnswerIs? Colors.green : Colors.red,
+                                fontWeight: FontWeight.bold,
+                                size: 20.0),
+                          )),
+                    ))
               ]);
             }),
           ),
@@ -185,6 +197,13 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                 onTap: () {
                   fillAnswer(quizRandomAlphabet[index], index);
                   clickedAlphabet(index);
+                  var isCheckFull = yourAnswer.where((element) => element["answer"] !="").length == yourAnswer.length ;
+                  if(isCheckFull){
+                    checkYourAnswer();
+                    controller.forward();
+
+                  }
+
                 },
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
