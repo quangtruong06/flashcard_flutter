@@ -2,6 +2,7 @@ import 'package:flashcard_flutter/pages/taxonomy_page/components/taxonomy_appbar
 import 'package:flashcard_flutter/pages/taxonomy_page/components/taxonomy_drawer.dart';
 import 'package:flashcard_flutter/pages/taxonomy_page/components/taxonomy_main.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Taxonomy extends StatelessWidget {
   const Taxonomy({Key? key}) : super(key: key);

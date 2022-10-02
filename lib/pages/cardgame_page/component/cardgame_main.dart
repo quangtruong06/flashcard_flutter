@@ -9,6 +9,7 @@ import 'package:flashcard_flutter/route_transition/route_transition.dart';
 import 'package:flashcard_flutter/widget/lastpage.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CardGameBody extends StatefulWidget {
   final TaxonomyModel data;
@@ -89,6 +90,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
+
                                     itemIndex == 0
                                         ? Image.network(
                                       data[0]["img"],

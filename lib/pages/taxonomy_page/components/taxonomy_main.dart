@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flashcard_flutter/bloc/bloc_test.dart';
 import 'package:flashcard_flutter/contain/Globals.dart';
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/contain/response_api.dart';
@@ -6,6 +9,7 @@ import 'package:flashcard_flutter/pages/taxonomy_page/model/taxonomy_model.dart'
 import 'package:flashcard_flutter/route_transition/route_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TaxonomyBody extends StatefulWidget {
   final Size size;
@@ -18,11 +22,32 @@ class TaxonomyBody extends StatefulWidget {
 
 class _TaxonomyBodyState extends State<TaxonomyBody> {
   bool isDownloaded = false;
+  var valueA = {};
+  final bloc = BlocTest();
   late Future<List<TaxonomyModel>> taxonomy;
+  Future<void> setData() async {
+    final prefs = await SharedPreferences.getInstance();
+    var abc = {
+      "PuzzleGame":10,
+      "WordGame":20
+    };
 
+    if(prefs.getString("taxonomyId") == null){
+      prefs.setString("taxonomyId", jsonEncode(abc));
+    }else{
+      setState((){
+        var vl  = prefs.getString("taxonomyId")!;
+        valueA = json.decode(vl);
+
+      });
+    }
+
+
+  }
   @override
   void initState() {
     taxonomy = getTaxonomiesFromApi();
+    setData();
     super.initState();
   }
 
@@ -64,6 +89,32 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                TextButton(onPressed: () async {
+                                  final prefs = await SharedPreferences.getInstance();
+                                  if(prefs.getString("taxonomyId") != null){
+                                    var vl = prefs.getString("taxonomyId")!;
+                                    var objVal = json.decode(vl);
+                                    objVal["WordGame"] += 10;
+                                    prefs.setString("taxonomyId", json.encode(objVal));
+
+                                    // setState((){
+                                    //   valueA = vl;
+                                    // });
+                                  }
+                                },child: Text("${valueA["WordGame"]}")), //sharepref
+                                StreamBuilder(
+                                  stream:bloc.countAbc,
+                                  builder: (context, snapshot) {
+                                    var data = 0;
+                                    if(snapshot.hasData){
+                                      data = snapshot.data as int;
+                                    }
+                                    return TextButton(onPressed: () async {
+                                      var rs = data + 10;
+                                      bloc.setCountAbc(rs);
+                                    },child: Text("$data"));
+                                  }
+                                ), // bloc
                                 RatingBarIndicator(
                                   rating: 4.5,
                                   itemBuilder: (context, index) => const Icon(

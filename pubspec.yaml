@@ -41,6 +41,7 @@ dependencies:
   carousel_slider: ^4.1.1
   flutter_widget_from_html: ^0.8.5
   just_audio: ^0.9.27
+  shared_preferences: ^2.0.15
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,6 +72,15 @@ flutter:
     - assets/images/word_game.png
     - assets/images/puzzle_game.png
     - assets/images/win.png
+    - assets/images/smile_1.png
+    - assets/images/smile_2.png
+    - assets/images/smile_3.png
+    - assets/images/smile_4.png
+    - assets/images/smile_5.png
+    - assets/images/cry_1.png
+    - assets/images/cry_2.png
+    - assets/images/cry_3.png
+    - assets/images/cry_4.png
     - assets/audios/exactly.mp3
     - assets/audios/fail.mp3
 

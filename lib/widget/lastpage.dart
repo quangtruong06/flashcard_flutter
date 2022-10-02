@@ -23,7 +23,7 @@ class LastPage extends StatelessWidget {
           children: [
             Utils.customText(text: title!,fontWeight: FontWeight.bold,color: const Color(0xFF3254AC),size: 20.0),
             const SizedBox(height: 20,),
-            Image.asset(imageSrc!,width: 30,),
+            Image.asset(imageSrc!,width: 100,),
             Padding(
               padding: const EdgeInsets.all(25.0),
               child: Utils.customText(text: description!,fontWeight: FontWeight.bold,size: 18.0),
