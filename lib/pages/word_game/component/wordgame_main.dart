@@ -1,8 +1,10 @@
 // ignore_for_file: void_checks
 
+import 'package:flashcard_flutter/contain/Globals.dart';
 import 'package:flashcard_flutter/contain/Utils.dart';
 import 'package:flashcard_flutter/pages/cardgame_page/model/cardgame_model.dart';
 import 'package:flashcard_flutter/pages/word_game/component/choose_answer.dart';
+import 'package:flashcard_flutter/widget/lastpage.dart';
 import 'package:flashcard_flutter/widget/nextbar.dart';
 import 'package:flashcard_flutter/widget/playaudio.dart';
 import 'package:flashcard_flutter/widget/score_dot.dart';
@@ -61,43 +63,51 @@ class _WordGameBodyState extends State<WordGameBody> {
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.easeIn);
                 }
-                return Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Colors.black26)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Stack(
-                        children: [
-                          Positioned(
-                              child: PlayAudio(
-                                  url: widget.cardData[index].mediaUrl!)),
-                          Positioned.fill(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: Utils.customText(
-                                      text: widget.cardData[index].name,
-                                      color: Colors.orange,
-                                      fontWeight: FontWeight.bold,
-                                      size: 20.0)))
-                        ],
-                      ),
-                      ScoreDot(scoreDot: scoreDots,),
-                      ChooseTheAnswer(
-                        cardData: widget.cardData,
-                        trueSelect: widget.cardData[index].imageUrl!,
-                        size: widget.size,
-                        nextQuestions: runNextQuestion, checkResult: checkResult,
-                      ),
-                      const Spacer(),
-                      NextBar(size: widget.size, isNext: isNext, nextPage: nextPage, stopNextQuestion: stopNextQuestion,)
-                    ],
-                  ),
-                );
+                if (index == widget.cardData.length){
+                  var trueAnswerList = scoreDots.where((element) => element == true);
+                  GameLastPageData data = GameLastPageData(trueAnswerList.length,scoreDots.length);
+                  data.loadData();
+                  return LastPage(title: data.title, imageSrc: data.imgSrc, description: data.description);
+                }
+                else{
+                  return Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.black26)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Stack(
+                          children: [
+                            Positioned(
+                                child: PlayAudio(
+                                    url: widget.cardData[index].mediaUrl!)),
+                            Positioned.fill(
+                                child: Align(
+                                    alignment: Alignment.center,
+                                    child: Utils.customText(
+                                        text: widget.cardData[index].name,
+                                        color: Colors.orange,
+                                        fontWeight: FontWeight.bold,
+                                        size: 20.0)))
+                          ],
+                        ),
+                        ScoreDot(scoreDot: scoreDots,),
+                        ChooseTheAnswer(
+                          cardData: widget.cardData,
+                          trueSelect: widget.cardData[index].imageUrl!,
+                          size: widget.size,
+                          nextQuestions: runNextQuestion, checkResult: checkResult,
+                        ),
+                        const Spacer(),
+                        NextBar(size: widget.size, isNext: isNext, nextPage: nextPage, stopNextQuestion: stopNextQuestion,)
+                      ],
+                    ),
+                  );
+                }
               },
-              itemCount: widget.cardData.length,
+              itemCount: widget.cardData.length+1,
             ),
           )
         ],

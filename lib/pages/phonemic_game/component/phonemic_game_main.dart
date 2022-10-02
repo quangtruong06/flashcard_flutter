@@ -15,31 +15,28 @@ class PhonemicGameBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Container(
-            height: 30,
+    return Column(
+      children: [
+        CarouselSlider.builder(
+          options: CarouselOptions(
+            height: size.height / 1.15,
+            viewportFraction: 1,
+            autoPlay: false,
+            enableInfiniteScroll: false,
+            initialPage: 0,
+            autoPlayCurve: Curves.fastOutSlowIn,
           ),
-          CarouselSlider.builder(
-            options: CarouselOptions(
-              height: size.height / 1.3,
-              viewportFraction: 1,
-              autoPlay: false,
-              enableInfiniteScroll: false,
-              initialPage: 0,
-              autoPlayCurve: Curves.fastOutSlowIn,
-            ),
-            itemBuilder: (BuildContext context, int index, int realIndex) {
-              return Builder(
-                builder: (BuildContext context) {
-                  if(index==cardData.length){
-                    final PhonemicLastPageData data = PhonemicLastPageData();
-                    return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description);
-                  }
-                  else{
-                    return Container(
+          itemBuilder: (BuildContext context, int index, int realIndex) {
+            return Builder(
+              builder: (BuildContext context) {
+                if(index==cardData.length){
+                  final PhonemicLastPageData data = PhonemicLastPageData();
+                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description);
+                }
+                else{
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -62,15 +59,15 @@ class PhonemicGameBody extends StatelessWidget {
                           const Expanded(child: PlayRecord())
                         ],
                       ),
-                    );
-                  }
-                },
-              );
-            },
-            itemCount: cardData.length+1,
-          ),
-        ],
-      ),
+                    ),
+                  );
+                }
+              },
+            );
+          },
+          itemCount: cardData.length+1,
+        ),
+      ],
     );
   }
 }
