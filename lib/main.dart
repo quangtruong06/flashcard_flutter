@@ -1,9 +1,10 @@
-import 'package:flashcard_flutter/pages/taxonomy_page/taxonomy_page.dart';
+import 'package:flashcard_flutter/screens/TaxonomyScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const FlashCardApp());
 }
+
 class FlashCardApp extends StatelessWidget {
   const FlashCardApp({Key? key}) : super(key: key);
 
@@ -15,5 +16,3 @@ class FlashCardApp extends StatelessWidget {
     );
   }
 }
-
-
