@@ -44,47 +44,43 @@ class _PlayRecordState extends State<PlayRecord> with TickerProviderStateMixin {
               }
             });
           },
-          child: SizedBox(
-            height: 70,
-            child: Center(
-              child: Stack(children: [
-                AnimatedBuilder(
-                  animation: controller,
-                  builder: (BuildContext context, Widget? child) {
-                    return Container(
-                      height: recordAnimate.value,
-                      width: recordAnimate.value,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              style: BorderStyle.solid,
-                              width: 1.0,
-                              color: const Color(0xFFEEA12B))),
-                    );
-                  },
-                ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      height: 50,
-                      width: 50,
-                      decoration: const BoxDecoration(
-                          color: Color(0xFFEEA12B), shape: BoxShape.circle),
-                      child: const Icon(
-                        Icons.mic_none_rounded,
-                        size: 30,
-                        color: Colors.white,
-                      ),
-                    ),
+          child: Stack(
+              children: [
+            AnimatedBuilder(
+              animation: controller,
+              builder: (BuildContext context, Widget? child) {
+                return Container(
+                  height: recordAnimate.value,
+                  width: recordAnimate.value,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          style: BorderStyle.solid,
+                          width: 1.0,
+                          color: const Color(0xFFEEA12B))),
+                );
+              },
+            ),
+            Positioned.fill(
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFFEEA12B), shape: BoxShape.circle),
+                  child: const Icon(
+                    Icons.mic_none_rounded,
+                    size: 30,
+                    color: Colors.white,
                   ),
                 ),
-              ]),
+              ),
             ),
-          ),
+          ]),
         ),
         const SizedBox(
-          height: 8,
+          height: 12,
         ),
         Utils.customText(
           text: "Nhấn vào mic để nói",

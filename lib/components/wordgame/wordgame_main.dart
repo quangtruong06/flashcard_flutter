@@ -25,6 +25,12 @@ class _WordGameBodyState extends State<WordGameBody> {
   final PageController _pageController = PageController();
   bool isNext = false;
   bool? yourResultIs;
+  restartGame(){
+    _pageController.jumpToPage(0);
+    setState(() {
+      scoreDots = [];
+    });
+  }
 
   checkResult(bool? yourResult) {
     setState(() {
@@ -52,36 +58,46 @@ class _WordGameBodyState extends State<WordGameBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                nextPage() {
-                  _pageController.animateToPage(
-                      _pageController.page!.toInt() + 1,
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeIn);
-                }
+    return PageView.builder(
+      controller: _pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        nextPage() {
+          _pageController.animateToPage(
+              _pageController.page!.toInt() + 1,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.easeIn);
+        }
 
-                if (index == widget.cardData.length) {
-                  var trueAnswerList =
-                      scoreDots.where((element) => element == true);
-                  GameLastPageData data =
-                      GameLastPageData(trueAnswerList.length, scoreDots.length);
-                  data.loadData();
-                  return LastPage(
-                      title: data.title,
-                      imageSrc: data.imgSrc,
-                      description: data.description);
-                } else {
-                  return Container(
+        if (index == widget.cardData.length) {
+          var trueAnswerList =
+              scoreDots.where((element) => element == true);
+          GameLastPageData data =
+              GameLastPageData(trueAnswerList.length, scoreDots.length);
+          data.loadData();
+          return LastPage(
+            restartGame: restartGame,
+              title: data.title,
+              imageSrc: data.imgSrc,
+              description: data.description);
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
+                      color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 6,
+                            blurRadius: 10,
+                            offset: const Offset(5, 3), // changes position of shadow
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: Colors.black26)),
                     child: Column(
@@ -121,14 +137,14 @@ class _WordGameBodyState extends State<WordGameBody> {
                         )
                       ],
                     ),
-                  );
-                }
-              },
-              itemCount: widget.cardData.length + 1,
+                  ),
+                ),
+              ],
             ),
-          )
-        ],
-      ),
+          );
+        }
+      },
+      itemCount: widget.cardData.length + 1,
     );
   }
 }

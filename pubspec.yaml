@@ -42,6 +42,7 @@ dependencies:
   flutter_widget_from_html: ^0.8.5
   just_audio: ^0.9.27
   shared_preferences: ^2.0.15
+  cached_network_image: ^3.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,6 +82,7 @@ flutter:
     - assets/images/cry_2.png
     - assets/images/cry_3.png
     - assets/images/cry_4.png
+    - assets/images/appicon.png
     - assets/audios/exactly.mp3
     - assets/audios/fail.mp3
 

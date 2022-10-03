@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/components/phonemic/playPhonemic.dart';
 import 'package:flashcard_flutter/components/phonemic/playRecord.dart';
 import 'package:flashcard_flutter/components/share_widgets/lastpage.dart';
@@ -9,8 +10,11 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 class PhonemicGameBody extends StatelessWidget {
   final Size size;
   final List<CardModel> cardData;
-
-  const PhonemicGameBody({Key? key, required this.size, required this.cardData})
+  CarouselController buttonCarouselController = CarouselController();
+  restartGame(){
+    buttonCarouselController.jumpToPage(0);
+  }
+  PhonemicGameBody({Key? key, required this.size, required this.cardData})
       : super(key: key);
 
   @override
@@ -18,8 +22,9 @@ class PhonemicGameBody extends StatelessWidget {
     return Column(
       children: [
         CarouselSlider.builder(
+          carouselController: buttonCarouselController,
           options: CarouselOptions(
-            height: size.height / 1.15,
+            height: size.height / 1.20,
             viewportFraction: 1,
             autoPlay: false,
             enableInfiniteScroll: false,
@@ -31,23 +36,37 @@ class PhonemicGameBody extends StatelessWidget {
               builder: (BuildContext context) {
                 if(index==cardData.length){
                   final PhonemicLastPageData data = PhonemicLastPageData();
-                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description);
+                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description,restartGame: restartGame,);
                 }
                 else{
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30),
+                    padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 16),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
+                        color: Colors.white,
                           borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: Colors.black26)),
+                          border: Border.all(color: Colors.black26),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 6,
+                            blurRadius: 10,
+                            offset: const Offset(5, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Container(
                             padding: const EdgeInsets.all(8),
                             height: size.height / 2.5,
-                            child: Image.network(cardData[index].imageUrl!),
+                            child: CachedNetworkImage(
+                              imageUrl: cardData[index].imageUrl!,
+                              placeholder: (context, url) => const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
                           ),
                           PlayPhonemic(phonemicData: cardData[index]),
                           const SizedBox(

@@ -48,9 +48,17 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
     final List trueAlphabet = widget.trueAnswer.trim().toUpperCase().split("");
     List list = [];
     final random = Random();
-    var randomAlphabetLength = trueAlphabet.length;
     const avalableAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    List randomAlphabet = List.generate(randomAlphabetLength,
+    int randomAlphabetLength(){
+      var randomAlphabetLength = trueAlphabet.length;
+      if(randomAlphabetLength*2>16){
+        return 16-randomAlphabetLength;
+      }
+      else{
+        return randomAlphabetLength;
+      }
+    }
+    List randomAlphabet = List.generate(randomAlphabetLength(),
         (index) => avalableAlphabet[random.nextInt(avalableAlphabet.length)]);
     list.add(trueAlphabet);
     list.add(randomAlphabet);
@@ -206,12 +214,16 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                     var isCheckFull = yourAnswer.where((element) => element["answer"] !="").length == yourAnswer.length ;
                     if(isCheckFull){
                       controller.forward();
-                      checkYourAnswer();
-                      widget.checkResult(yourAnswerIs);
-                      setState(() {
-                        isFullAnswered= true;
+                      controller.addStatusListener((status) {
+                        if(controller.isCompleted){
+                          checkYourAnswer();
+                          widget.checkResult(yourAnswerIs);
+                          setState(() {
+                            isFullAnswered= true;
+                          });
+                          widget.nextQuestions();
+                        }
                       });
-                      widget.nextQuestions();
                     }
                   }
                 },

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
@@ -91,13 +92,15 @@ class _CardGameBodyState extends State<CardGameBody> {
                                   children: [
 
                                     itemIndex == 0
-                                        ? Image.network(
-                                      data[0]["img"],
+                                        ?
+                                    CachedNetworkImage(
+                                      imageUrl: data[0]["img"],
                                       width: 200,
                                       height: 200,
                                       fit: BoxFit.fill,
-                                    )
-                                        : Image.asset(
+                                      placeholder: (context, url) => const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                                    ) : Image.asset(
                                       data[itemIndex]["img"],
                                       width: 200,
                                       height: 200,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
 import 'package:flashcard_flutter/components/share_widgets/route_transition.dart';
@@ -7,7 +8,6 @@ import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class TaxonomyBody extends StatefulWidget {
   final Size size;
@@ -22,6 +22,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
   bool isDownloaded = false;
   var valueA = {};
   late Future<List<TaxonomyModel>> taxonomy;
+
   @override
   void initState() {
     taxonomy = getTaxonomiesFromApi();
@@ -77,10 +78,14 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                   direction: Axis.horizontal,
                                 ),
                                 const SizedBox(height: defaultPadding),
-                                Image.network(
-                                  data[index].imageUrl!,
-                                  fit: BoxFit.cover,
+                                CachedNetworkImage(
+                                  imageUrl: data[index].imageUrl!,
                                   width: 100,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
                                 const SizedBox(height: defaultPadding),
                                 Utils.customText(
