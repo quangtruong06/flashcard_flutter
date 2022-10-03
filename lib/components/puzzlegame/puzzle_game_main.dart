@@ -113,8 +113,6 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
                                 child: CachedNetworkImage(
                                   imageUrl: widget.cardData[index].imageUrl!,
                                   fit: BoxFit.fill,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
                                       const Icon(Icons.error),
                                 )),

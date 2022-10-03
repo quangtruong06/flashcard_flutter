@@ -64,7 +64,6 @@ class PhonemicGameBody extends StatelessWidget {
                             height: size.height / 2.5,
                             child: CachedNetworkImage(
                               imageUrl: cardData[index].imageUrl!,
-                              placeholder: (context, url) => const CircularProgressIndicator(),
                               errorWidget: (context, url, error) => const Icon(Icons.error),
                             ),
                           ),

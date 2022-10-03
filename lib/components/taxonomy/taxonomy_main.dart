@@ -82,10 +82,8 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                   imageUrl: data[index].imageUrl!,
                                   width: 100,
                                   fit: BoxFit.cover,
-                                  placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) =>
-                                      Icon(Icons.error),
+                                      const Icon(Icons.error),
                                 ),
                                 const SizedBox(height: defaultPadding),
                                 Utils.customText(
