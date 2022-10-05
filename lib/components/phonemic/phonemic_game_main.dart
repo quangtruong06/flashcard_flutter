@@ -10,7 +10,7 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 class PhonemicGameBody extends StatelessWidget {
   final Size size;
   final List<CardModel> cardData;
-  CarouselController buttonCarouselController = CarouselController();
+  final CarouselController buttonCarouselController = CarouselController();
   restartGame(){
     buttonCarouselController.jumpToPage(0);
   }
@@ -36,7 +36,7 @@ class PhonemicGameBody extends StatelessWidget {
               builder: (BuildContext context) {
                 if(index==cardData.length){
                   final PhonemicLastPageData data = PhonemicLastPageData();
-                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description,restartGame: restartGame,);
+                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description,restartGame: restartGame);
                 }
                 else{
                   return Padding(

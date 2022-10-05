@@ -1,10 +1,9 @@
-import 'dart:math';
-
-import 'package:flashcard_flutter/models/cardgame_model.dart';
-import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'dart:math';
 
+import '../../models/cardgame_model.dart';
+import '../../utils/Utils.dart';
 class PlayPhonemic extends StatefulWidget {
   final CardModel phonemicData;
 

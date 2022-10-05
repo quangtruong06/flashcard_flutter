@@ -4,17 +4,16 @@ import 'package:flutter/material.dart';
 import '../../utils/Utils.dart';
 
 class LastPage extends StatelessWidget {
-  Function? restartGame;
-  String? title;
-  String? imageSrc;
-  String? description;
-  String restart = "xem từ đầu";
-  String playGame = "chơi game";
-  LastPage({super.key, required this.title,required this.imageSrc,required this.description,this.restartGame});
+  final Function? restartGame;
+  final String? title;
+  final String? imageSrc;
+  final String? description;
+  final String restart = "xem từ đầu";
+  final String playGame = "chơi game";
+  const LastPage({super.key, required this.title,required this.imageSrc,required this.description,this.restartGame,});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return Container(
         height: double.maxFinite,
         width: double.maxFinite,
         decoration: const BoxDecoration(
@@ -29,7 +28,8 @@ class LastPage extends StatelessWidget {
             Image.asset(imageSrc!,width: 100,),
             Padding(
               padding: const EdgeInsets.all(25.0),
-              child: Utils.customText(text: description!,fontWeight: FontWeight.bold,size: 18.0),
+              child: Utils.customText(text: description!,fontWeight: FontWeight.bold,size: 18.0,
+              textAlign: TextAlign.center),
             ),
             const SizedBox(height: 20,),
             InkWell(
@@ -67,7 +67,6 @@ class LastPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

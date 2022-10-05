@@ -1,5 +1,5 @@
-import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
+import '../../utils/Utils.dart';
 
 class PlayRecord extends StatefulWidget {
   const PlayRecord({

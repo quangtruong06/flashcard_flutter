@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
@@ -7,7 +6,7 @@ import 'package:flashcard_flutter/screens/CardScreen.dart';
 import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../share_widgets/rating_bar.dart';
 
 class TaxonomyBody extends StatefulWidget {
   final Size size;
@@ -67,16 +66,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                RatingBarIndicator(
-                                  rating: 4.5,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
-                                  ),
-                                  itemCount: 5,
-                                  itemSize: 20.0,
-                                  direction: Axis.horizontal,
-                                ),
+                                const MyRatingBar(itemSize: 20.0, rating: 4.5),
                                 const SizedBox(height: defaultPadding),
                                 CachedNetworkImage(
                                   imageUrl: data[index].imageUrl!,
@@ -121,7 +111,17 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                 itemCount: data.length,
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircularProgressIndicator(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Utils.customText(text: "Loading Data...",fontWeight: FontWeight.bold,color: const Color(0xFF3254AC)),
+                  )
+                ],
+              ));
             }
           }),
     );

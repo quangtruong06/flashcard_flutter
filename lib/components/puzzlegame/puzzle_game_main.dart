@@ -69,7 +69,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
         if (index == widget.cardData.length) {
           var trueAnswerList = scoreDots.where((element) => element == true);
           GameLastPageData data =
-              GameLastPageData(trueAnswerList.length, scoreDots.length);
+              GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
           return LastPage(
             restartGame: restartGame,
