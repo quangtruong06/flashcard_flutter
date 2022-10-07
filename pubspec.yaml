@@ -85,6 +85,8 @@ flutter:
     - assets/images/appicon.png
     - assets/audios/exactly.mp3
     - assets/audios/fail.mp3
+    - assets/audios/levelpassed.mp3
+    - assets/audios/tapaudio.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

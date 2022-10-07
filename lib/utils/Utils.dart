@@ -27,13 +27,24 @@ class Utils {
     );
   }
 }
-void playAudioResult(bool yourResult){
+
+class PlayAudio{
   final player = AudioPlayer();
-  if(yourResult==true){
-    player.setAsset("assets/audios/exactly.mp3");
+  void playAudioResult(bool yourResult){
+    if(yourResult==true){
+      player.setAsset("assets/audios/exactly.mp3");
+      player.play();
+    }else{
+      player.setAsset("assets/audios/fail.mp3");
+      player.play();
+    }
+  }
+  void playAudioLastPage(){
+    player.setAsset("assets/audios/levelpassed.mp3");
     player.play();
-  }else{
-    player.setAsset("assets/audios/fail.mp3");
+  }
+  void tapAudio(){
+    player.setAsset("assets/audios/tapaudio.mp3");
     player.play();
   }
 }

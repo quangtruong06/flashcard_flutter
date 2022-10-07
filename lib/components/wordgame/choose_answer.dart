@@ -37,7 +37,7 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
       isShowResult = true;
       widget.nextQuestions();
       isClicked = true;
-      playAudioResult(theSelect[tappedIndex!] == widget.trueSelect);
+      PlayAudio().playAudioResult(theSelect[tappedIndex!] == widget.trueSelect);
       widget.checkResult(theSelect[tappedIndex!] == widget.trueSelect);
     }
   }

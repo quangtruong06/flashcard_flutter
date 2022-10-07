@@ -12,7 +12,7 @@ class SlideRightRoute extends PageRouteBuilder {
             Animation<double> secondaryAnimation,
           ) =>
               page,
-          transitionDuration: const Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 500),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -39,7 +39,7 @@ class SlideLeftRoute extends PageRouteBuilder {
             Animation<double> secondaryAnimation,
           ) =>
               page,
-          transitionDuration: const Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 500),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,
@@ -67,7 +67,7 @@ class SlideBottomRoute extends PageRouteBuilder {
             Animation<double> secondaryAnimation,
           ) =>
               page,
-          transitionDuration: const Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 500),
           transitionsBuilder: (
             BuildContext context,
             Animation<double> animation,

@@ -106,7 +106,7 @@ class _WordGameBodyState extends State<WordGameBody> {
                         Stack(
                           children: [
                             Positioned(
-                                child: PlayAudio(
+                                child: AnimatedPlayAudio(
                                     url: widget.cardData[index].mediaUrl!)),
                             Positioned.fill(
                                 child: Align(

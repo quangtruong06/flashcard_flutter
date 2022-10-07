@@ -7,7 +7,7 @@ class AppScoreData extends InheritedWidget{
   bool updateShouldNotify(covariant AppScoreData oldWidget) {
     return appScoreData != oldWidget.appScoreData;
   }
-  static AppScoreData? of(BuildContext context){
-    return context.dependOnInheritedWidgetOfExactType<AppScoreData>();
+  static AppScoreData of(BuildContext context){
+    return context.dependOnInheritedWidgetOfExactType<AppScoreData>()!;
   }
 }

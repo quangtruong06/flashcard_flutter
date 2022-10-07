@@ -3,6 +3,7 @@ import 'package:flashcard_flutter/components/share_widgets/lastpage.dart';
 import 'package:flashcard_flutter/components/share_widgets/nextbar.dart';
 import 'package:flashcard_flutter/components/share_widgets/playaudio.dart';
 import 'package:flashcard_flutter/components/share_widgets/score_dot.dart';
+import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       itemBuilder: (context, index) {
         nextPage() {
@@ -121,7 +122,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
                                 left: 0,
                                 right: 0,
                                 child: Center(
-                                    child: PlayAudio(
+                                    child: AnimatedPlayAudio(
                                         url: widget.cardData[index].mediaUrl!)))
                           ],
                         ),

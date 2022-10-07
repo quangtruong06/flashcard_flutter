@@ -20,7 +20,6 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   List listAnswer = [];
   bool isClicked = false;
   bool yourAnswerIs = false;
-
   checkYourAnswer() {
     String answer = "";
     for (var element in yourAnswer) {
@@ -218,6 +217,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                         if(controller.isCompleted){
                           checkYourAnswer();
                           widget.checkResult(yourAnswerIs);
+                          PlayAudio().playAudioResult(yourAnswerIs);
                           setState(() {
                             isFullAnswered= true;
                           });

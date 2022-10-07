@@ -4,6 +4,7 @@ import 'package:flashcard_flutter/components/share_widgets/share_appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../models/TaxonomyModel.dart';
+import '../utils/Utils.dart';
 class CardGamePage extends StatelessWidget {
   final TaxonomyModel data;
 
@@ -12,7 +13,29 @@ class CardGamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ShareAppBar(title: data.name),
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+        ),
+        backgroundColor: const Color(0xFF3254AC),
+        title: Utils.customText(
+            text: data.name,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            size: 20.0,
+            fontStyle: FontStyle.italic),
+        centerTitle: true,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Color(0xFF2E4053), Color(0xFF3254AC)]),
+          ),
+        )),
       body: CardGameBody(
         data: data,
       ),
