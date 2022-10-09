@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
 
-class AppScoreData extends InheritedWidget{
+class AppScoreDataInherited extends InheritedWidget{
   final dynamic appScoreData;
-  const AppScoreData({super.key, required Widget child,this.appScoreData}):super(child: child);
+  final void Function(double) setWordGameScore;
+  final void Function(double) setPuzzleGameScore;
+  const AppScoreDataInherited({super.key,required this.setWordGameScore, required this.setPuzzleGameScore,  required Widget child,required this.appScoreData}):super(child: child);
   @override
-  bool updateShouldNotify(covariant AppScoreData oldWidget) {
-    return appScoreData != oldWidget.appScoreData;
+  bool updateShouldNotify(covariant AppScoreDataInherited oldWidget) {
+    return true;
   }
-  static AppScoreData? of(BuildContext context){
-    return context.dependOnInheritedWidgetOfExactType<AppScoreData>();
+  static AppScoreDataInherited of(BuildContext context){
+    final AppScoreDataInherited? result = context.dependOnInheritedWidgetOfExactType<AppScoreDataInherited>();
+
+    return result!;
+  }
+}
+class AppScoreData extends StatefulWidget {
+  final Size size;
+  final Widget child;
+  const AppScoreData({Key? key, required this.child, required this.size}) : super(key: key);
+
+  @override
+  State<AppScoreData> createState() => _AppScoreDataState();
+}
+
+class _AppScoreDataState extends State<AppScoreData> {
+  final dynamic appScoreData = {"WordGame":0.0,"PuzzleGame":0.0};
+  void setWordGameScore(double wordGameScore){
+    setState(() {
+      appScoreData["WordGame"]= wordGameScore;
+    });
+  }
+  void setPuzzleGameScore(double puzzleGameScore){
+    setState(() {
+      appScoreData["PuzzleGame"]= puzzleGameScore;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (BuildContext context) {
+        return AppScoreDataInherited(setWordGameScore: setWordGameScore, setPuzzleGameScore: setPuzzleGameScore, appScoreData: appScoreData,
+            child: widget.child);
+      },
+    );
   }
 }

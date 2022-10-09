@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
 import 'package:flashcard_flutter/components/share_widgets/route_transition.dart';
@@ -12,16 +13,13 @@ class TaxonomyBody extends StatefulWidget {
   final Size size;
 
   const TaxonomyBody({Key? key, required this.size}) : super(key: key);
-
   @override
   State<TaxonomyBody> createState() => _TaxonomyBodyState();
 }
 
 class _TaxonomyBodyState extends State<TaxonomyBody> {
   bool isDownloaded = false;
-  var valueA = {};
   late Future<List<TaxonomyModel>> taxonomy;
-
   @override
   void initState() {
     taxonomy = getTaxonomiesFromApi();
@@ -30,6 +28,8 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
 
   @override
   Widget build(BuildContext context) {
+    var data = AppScoreDataInherited.of(context).appScoreData;
+    double score = (data["WordGame"]+data["PuzzleGame"])/2*5;
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
       color: const Color(0xFFD5D8DC),
@@ -66,7 +66,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const MyRatingBar(itemSize: 20.0, rating: 4.5),
+                                MyRatingBar(itemSize: 20.0, rating: score),
                                 const SizedBox(height: defaultPadding),
                                 CachedNetworkImage(
                                   imageUrl: data[index].imageUrl!,

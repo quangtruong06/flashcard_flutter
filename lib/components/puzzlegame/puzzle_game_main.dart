@@ -3,6 +3,7 @@ import 'package:flashcard_flutter/components/share_widgets/lastpage.dart';
 import 'package:flashcard_flutter/components/share_widgets/nextbar.dart';
 import 'package:flashcard_flutter/components/share_widgets/playaudio.dart';
 import 'package:flashcard_flutter/components/share_widgets/score_dot.dart';
+import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
+          AppScoreDataInherited.of(context).setPuzzleGameScore(data.score()!);
           return LastPage(
             restartGame: restartGame,
               title: data.title,

@@ -5,8 +5,8 @@ import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flutter/material.dart';
 
 class Taxonomy extends StatelessWidget {
-  final dynamic appScoreData;
-  const Taxonomy({Key? key, this.appScoreData}) : super(key: key);
+  const Taxonomy({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -16,7 +16,7 @@ class Taxonomy extends StatelessWidget {
           size: size,
         ),
         body: AppScoreData(
-          appScoreData: appScoreData,
+          size: size,
           child: TaxonomyBody(
             size: size,
           ),

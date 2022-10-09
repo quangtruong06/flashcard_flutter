@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/components/share_widgets/rating_bar.dart';
+import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
@@ -53,7 +54,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                   cardType: widget.data.name!,
                   cardData: carddata,
                 ),
-                "Score": 2.0
+                "Score": AppScoreDataInherited.of(context).appScoreData["WordGame"]
               },
               {
                 "name": "Puzzle Game",
@@ -61,7 +62,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                 "nextpage": PuzzleGame(
                   cardType: widget.data.name!,
                   cardData: carddata,
-                ),"Score":4.3
+                ),"Score": AppScoreDataInherited.of(context).appScoreData["PuzzleGame"]
               }
             ];
             return Center(

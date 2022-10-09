@@ -1,6 +1,7 @@
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../data_inherited.dart';
 import '../../utils/Globals.dart';
 import '../../utils/Utils.dart';
 import '../share_widgets/lastpage.dart';
@@ -75,6 +76,7 @@ class _WordGameBodyState extends State<WordGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
+          AppScoreDataInherited.of(context).setWordGameScore(data.score()!);
           return LastPage(
             restartGame: restartGame,
               title: data.title,
