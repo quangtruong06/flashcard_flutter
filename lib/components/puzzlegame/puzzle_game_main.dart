@@ -58,7 +58,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       controller: _pageController,
       itemBuilder: (context, index) {
         nextPage() {
@@ -123,7 +123,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
                                 left: 0,
                                 right: 0,
                                 child: Center(
-                                    child: PlayAudio(
+                                    child: AnimatedPlayAudio(
                                         url: widget.cardData[index].mediaUrl!)))
                           ],
                         ),

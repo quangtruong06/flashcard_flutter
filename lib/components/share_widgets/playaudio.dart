@@ -3,15 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
-class PlayAudio extends StatefulWidget {
-  const PlayAudio({Key? key, required this.url}) : super(key: key);
+class AnimatedPlayAudio extends StatefulWidget {
+  const AnimatedPlayAudio({Key? key, required this.url}) : super(key: key);
   final String url;
 
   @override
-  State<PlayAudio> createState() => _PlayAudioState();
+  State<AnimatedPlayAudio> createState() => _AnimatedPlayAudio();
 }
 
-class _PlayAudioState extends State<PlayAudio> with TickerProviderStateMixin {
+class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderStateMixin {
   final player = AudioPlayer();
   final angle = 180 * pi / 180;
   bool isPlay = false;

@@ -138,7 +138,28 @@ class _CardGameBodyState extends State<CardGameBody> {
                   }),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/smile_1.png",
+                      width: 150,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: CircularProgressIndicator(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Utils.customText(
+                          text: "Loading Data...",
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF3254AC)),
+                    )
+                  ],
+                ));
           }
         });
   }

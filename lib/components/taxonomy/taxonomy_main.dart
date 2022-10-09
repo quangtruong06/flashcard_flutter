@@ -25,7 +25,6 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
     taxonomy = getTaxonomiesFromApi();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     var data = AppScoreDataInherited.of(context).appScoreData;
@@ -73,7 +72,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                   width: 100,
                                   fit: BoxFit.cover,
                                   errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
+                                  const Icon(Icons.error),
                                 ),
                                 const SizedBox(height: defaultPadding),
                                 Utils.customText(
@@ -91,13 +90,13 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                   padding: const EdgeInsets.only(left: 4.0),
                                   child: isDownloaded
                                       ? const Icon(
-                                          Icons.cloud_download_outlined,
-                                          color: Colors.blue,
-                                        )
+                                    Icons.cloud_download_outlined,
+                                    color: Colors.blue,
+                                  )
                                       : const Icon(
-                                          Icons.check,
-                                          color: Colors.blue,
-                                        ))
+                                    Icons.check,
+                                    color: Colors.blue,
+                                  ))
                             ],
                           ),
                           const SizedBox(
@@ -105,20 +104,31 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                           )
                         ],
                       ),
-                    ),
+                    )
                   );
                 },
                 itemCount: data.length,
               );
             } else {
-              return Center(child: Column(
+              return Center(
+                  child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircularProgressIndicator(),
+                  Image.asset(
+                    "assets/images/smile_1.png",
+                    width: 150,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: CircularProgressIndicator(),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0),
-                    child: Utils.customText(text: "Loading Data...",fontWeight: FontWeight.bold,color: const Color(0xFF3254AC)),
+                    child: Utils.customText(
+                        text: "Loading Data...",
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF3254AC)),
                   )
                 ],
               ));

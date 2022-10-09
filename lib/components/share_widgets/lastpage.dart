@@ -3,14 +3,26 @@ import 'package:flutter/material.dart';
 
 import '../../utils/Utils.dart';
 
-class LastPage extends StatelessWidget {
+class LastPage extends StatefulWidget {
   final Function? restartGame;
   final String? title;
   final String? imageSrc;
   final String? description;
-  final String restart = "xem từ đầu";
-  final String playGame = "chơi game";
+
   const LastPage({super.key, required this.title,required this.imageSrc,required this.description,this.restartGame,});
+  @override
+  State<LastPage> createState() => _LastPageState();
+}
+
+class _LastPageState extends State<LastPage> {
+  final String restart = "xem từ đầu";
+
+  final String playGame = "chơi game";
+  @override
+  void initState() {
+    PlayAudio().playAudioLastPage();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,18 +35,18 @@ class LastPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Utils.customText(text: title!,fontWeight: FontWeight.bold,color: const Color(0xFF3254AC),size: 20.0),
+            Utils.customText(text: widget.title!,fontWeight: FontWeight.bold,color: const Color(0xFF3254AC),size: 20.0),
             const SizedBox(height: 20,),
-            Image.asset(imageSrc!,width: 100,),
+            Image.asset(widget.imageSrc!,width: 100,),
             Padding(
               padding: const EdgeInsets.all(25.0),
-              child: Utils.customText(text: description!,fontWeight: FontWeight.bold,size: 18.0,
+              child: Utils.customText(text: widget.description!,fontWeight: FontWeight.bold,size: 18.0,
               textAlign: TextAlign.center),
             ),
             const SizedBox(height: 20,),
             InkWell(
               onTap: (){
-                restartGame!();
+                widget.restartGame!();
               },
               child: Container(
                 height: 40,

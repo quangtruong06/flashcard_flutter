@@ -9,10 +9,15 @@ class AppScoreDataInherited extends InheritedWidget{
   bool updateShouldNotify(covariant AppScoreDataInherited oldWidget) {
     return true;
   }
+<<<<<<< HEAD
   static AppScoreDataInherited of(BuildContext context){
     final AppScoreDataInherited? result = context.dependOnInheritedWidgetOfExactType<AppScoreDataInherited>();
 
     return result!;
+=======
+  static AppScoreData of(BuildContext context){
+    return context.dependOnInheritedWidgetOfExactType<AppScoreData>()!;
+>>>>>>> 552ff6f433c8c501dce9f04921dff87731af7851
   }
 }
 class AppScoreData extends StatefulWidget {
