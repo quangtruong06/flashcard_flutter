@@ -27,7 +27,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
   }
   @override
   Widget build(BuildContext context) {
-    var data = AppScoreDataInherited.of(context).appScoreData;
+    var data = AppScoreDataInherited.of(context)!.appScore;
     double score = (data["WordGame"]+data["PuzzleGame"])/2*5;
     return Container(
       padding: const EdgeInsets.all(defaultPadding),

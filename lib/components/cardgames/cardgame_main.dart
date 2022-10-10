@@ -15,7 +15,6 @@ import '../../screens/PhonemicScreen.dart';
 
 class CardGameBody extends StatefulWidget {
   final TaxonomyModel data;
-
   const CardGameBody({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -30,7 +29,6 @@ class _CardGameBodyState extends State<CardGameBody> {
     cardData = getCardDataFromAPI(widget.data.taxonomyId!);
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<CardModel>>(
@@ -54,7 +52,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                   cardType: widget.data.name!,
                   cardData: carddata,
                 ),
-                "Score": AppScoreDataInherited.of(context).appScoreData["WordGame"]
+                "Score": 2.0
               },
               {
                 "name": "Puzzle Game",
@@ -62,7 +60,9 @@ class _CardGameBodyState extends State<CardGameBody> {
                 "nextpage": PuzzleGame(
                   cardType: widget.data.name!,
                   cardData: carddata,
-                ),"Score": AppScoreDataInherited.of(context).appScoreData["PuzzleGame"]
+                ),
+                "Score":
+                    1.0
               }
             ];
             return Center(
@@ -105,9 +105,13 @@ class _CardGameBodyState extends State<CardGameBody> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  if(itemIndex!=0)
-                                     MyRatingBar(itemSize: 25, rating: data[itemIndex]["Score"]),
-                                  const SizedBox(height: 8.0,),
+                                  if (itemIndex != 0)
+                                    MyRatingBar(
+                                        itemSize: 25,
+                                        rating: data[itemIndex]["Score"]),
+                                  const SizedBox(
+                                    height: 8.0,
+                                  ),
                                   itemIndex == 0
                                       ? CachedNetworkImage(
                                           imageUrl: data[0]["img"],
@@ -140,26 +144,26 @@ class _CardGameBodyState extends State<CardGameBody> {
           } else {
             return Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/smile_1.png",
-                      width: 150,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 16.0),
-                      child: CircularProgressIndicator(),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Utils.customText(
-                          text: "Loading Data...",
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF3254AC)),
-                    )
-                  ],
-                ));
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/smile_1.png",
+                  width: 150,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: CircularProgressIndicator(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Utils.customText(
+                      text: "Loading Data...",
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF3254AC)),
+                )
+              ],
+            ));
           }
         });
   }

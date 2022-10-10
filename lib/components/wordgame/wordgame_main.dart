@@ -76,7 +76,7 @@ class _WordGameBodyState extends State<WordGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          AppScoreDataInherited.of(context).setWordGameScore(data.score()!);
+          AppScoreDataInherited.of(context)!.setWordGameScore(data.score()!);
           return LastPage(
             restartGame: restartGame,
               title: data.title,
