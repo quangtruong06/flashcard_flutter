@@ -15,6 +15,7 @@ import '../../screens/PhonemicScreen.dart';
 
 class CardGameBody extends StatefulWidget {
   final TaxonomyModel data;
+
   const CardGameBody({Key? key, required this.data}) : super(key: key);
 
   @override
@@ -29,8 +30,10 @@ class _CardGameBodyState extends State<CardGameBody> {
     cardData = getCardDataFromAPI(widget.data.taxonomyId!);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
+    var scoreData = AppScoreDataInherited.of(context)!.appScore;
     return FutureBuilder<List<CardModel>>(
         future: cardData,
         builder: (context, snapshot) {
@@ -52,7 +55,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                   cardType: widget.data.name!,
                   cardData: carddata,
                 ),
-                "Score": 2.0
+                "Score": scoreData["WordGame"]
               },
               {
                 "name": "Puzzle Game",
@@ -61,8 +64,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                   cardType: widget.data.name!,
                   cardData: carddata,
                 ),
-                "Score":
-                    1.0
+                "Score": scoreData["PuzzleGame"]
               }
             ];
             return Center(
@@ -108,7 +110,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                                   if (itemIndex != 0)
                                     MyRatingBar(
                                         itemSize: 25,
-                                        rating: data[itemIndex]["Score"]),
+                                        rating: data[itemIndex]["Score"] * 5),
                                   const SizedBox(
                                     height: 8.0,
                                   ),

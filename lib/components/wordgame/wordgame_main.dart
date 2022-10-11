@@ -26,7 +26,8 @@ class _WordGameBodyState extends State<WordGameBody> {
   final PageController _pageController = PageController();
   bool isNext = false;
   bool? yourResultIs;
-  restartGame(){
+
+  restartGame() {
     _pageController.jumpToPage(0);
     setState(() {
       scoreDots = [];
@@ -64,21 +65,21 @@ class _WordGameBodyState extends State<WordGameBody> {
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         nextPage() {
-          _pageController.animateToPage(
-              _pageController.page!.toInt() + 1,
+          _pageController.animateToPage(_pageController.page!.toInt() + 1,
               duration: const Duration(milliseconds: 400),
               curve: Curves.easeIn);
         }
 
         if (index == widget.cardData.length) {
-          var trueAnswerList =
-              scoreDots.where((element) => element == true);
+          var trueAnswerList = scoreDots.where((element) => element == true);
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          AppScoreDataInherited.of(context)!.setWordGameScore(data.score()!);
+          Future(() async {
+            AppScoreDataInherited.of(context)!.setWordGameScore(data.score()!);
+          });
           return LastPage(
-            restartGame: restartGame,
+              restartGame: restartGame,
               title: data.title,
               imageSrc: data.imgSrc,
               description: data.description);
@@ -91,13 +92,14 @@ class _WordGameBodyState extends State<WordGameBody> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 6,
                             blurRadius: 10,
-                            offset: const Offset(5, 3), // changes position of shadow
+                            offset: const Offset(
+                                5, 3), // changes position of shadow
                           ),
                         ],
                         borderRadius: BorderRadius.circular(5),

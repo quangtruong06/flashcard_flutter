@@ -1,4 +1,6 @@
+import 'package:flashcard_flutter/save/shared_prefence.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AppScoreDataInherited extends InheritedWidget {
   final dynamic appScore;
@@ -17,22 +19,24 @@ class AppScoreDataInherited extends InheritedWidget {
   bool updateShouldNotify(AppScoreDataInherited oldWidget) {
     return true;
   }
+
   static AppScoreDataInherited? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<AppScoreDataInherited>()!;
   }
 }
 
 class AppScoreData extends StatefulWidget {
-  final Size size;
   final Widget child;
-  const AppScoreData({Key? key, required this.child, required this.size})
-      : super(key: key);
+
+  const AppScoreData({Key? key, required this.child}) : super(key: key);
 
   @override
   State<AppScoreData> createState() => _AppScoreDataState();
 }
+
 class _AppScoreDataState extends State<AppScoreData> {
-  final dynamic appScoreData = {"WordGame": 0.0, "PuzzleGame": 0.0};
+  dynamic appScoreData = {"WordGame": 0.0, "PuzzleGame": 0.0};
+  final prefs = SharedPreferences.getInstance();
 
   void setWordGameScore(double wordGameScore) {
     setState(() {
@@ -44,6 +48,10 @@ class _AppScoreDataState extends State<AppScoreData> {
     setState(() {
       appScoreData["PuzzleGame"] = puzzleGameScore;
     });
+  }
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

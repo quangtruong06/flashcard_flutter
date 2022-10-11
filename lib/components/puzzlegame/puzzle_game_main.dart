@@ -26,12 +26,14 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
   List<bool> scoreDots = [];
   bool isNext = false;
   final PageController _pageController = PageController();
-  restartGame(){
+
+  restartGame() {
     _pageController.jumpToPage(0);
     setState(() {
       scoreDots = [];
     });
   }
+
   checkResult(bool? yourResult) {
     setState(() {
       scoreDots.add(yourResult!);
@@ -55,6 +57,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
     _pageController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return PageView.builder(
@@ -72,9 +75,12 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          AppScoreDataInherited.of(context)!.setPuzzleGameScore(data.score()!);
+          Future(() async {
+            AppScoreDataInherited.of(context)!
+                .setPuzzleGameScore(data.score()!);
+          });
           return LastPage(
-            restartGame: restartGame,
+              restartGame: restartGame,
               title: data.title,
               imageSrc: data.imgSrc,
               description: data.description);
@@ -91,13 +97,14 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
                   child: Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 6,
                             blurRadius: 10,
-                            offset: const Offset(5, 3), // changes position of shadow
+                            offset: const Offset(
+                                5, 3), // changes position of shadow
                           ),
                         ],
                         borderRadius: BorderRadius.circular(5),

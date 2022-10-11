@@ -1,11 +1,12 @@
 import 'package:flashcard_flutter/components/taxonomy/taxonomy_appbar.dart';
 import 'package:flashcard_flutter/components/taxonomy/taxonomy_drawer.dart';
 import 'package:flashcard_flutter/components/taxonomy/taxonomy_main.dart';
-import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Taxonomy extends StatelessWidget {
-  const Taxonomy({super.key});
+  final prefs = SharedPreferences.getInstance();
+   Taxonomy({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +16,8 @@ class Taxonomy extends StatelessWidget {
         drawer: TaxonomyDrawer(
           size: size,
         ),
-        body: AppScoreData(
+        body: TaxonomyBody(
           size: size,
-          child: TaxonomyBody(
-            size: size,
-          ),
         ));
   }
 }

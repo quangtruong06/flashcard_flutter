@@ -1,3 +1,4 @@
+import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/screens/TaxonomyScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,11 @@ class FlashCardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Taxonomy(),
+    return  AppScoreData(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Taxonomy(),
+      ),
     );
   }
 }

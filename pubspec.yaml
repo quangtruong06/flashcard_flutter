@@ -36,8 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_rating_bar: ^4.0.1
   http: ^0.13.5
-  equatable: ^2.0.3
-  flutter_bloc: ^8.0.1
   carousel_slider: ^4.1.1
   flutter_widget_from_html: ^0.8.5
   just_audio: ^0.9.27
