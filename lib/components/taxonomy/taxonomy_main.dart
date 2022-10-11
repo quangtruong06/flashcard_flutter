@@ -13,7 +13,6 @@ class TaxonomyBody extends StatefulWidget {
   final Size size;
 
   const TaxonomyBody({Key? key, required this.size}) : super(key: key);
-
   @override
   State<TaxonomyBody> createState() => _TaxonomyBodyState();
 }
