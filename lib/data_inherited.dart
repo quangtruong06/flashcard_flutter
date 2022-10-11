@@ -17,7 +17,7 @@ class AppScoreDataInherited extends InheritedWidget {
 
   @override
   bool updateShouldNotify(AppScoreDataInherited oldWidget) {
-    return true;
+    return appScore != oldWidget.appScore;
   }
 
   static AppScoreDataInherited? of(BuildContext context) {
