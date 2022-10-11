@@ -141,7 +141,8 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
                         ),
                         AnimatedOpacity(
                           duration: const Duration(milliseconds: 400),
-                          opacity: isNext ? 1.0 : 0.0,
+                          // opacity: isNext ? 1.0 : 0.0,
+                          opacity: 1.0,
                           child: Align(
                               alignment: Alignment.bottomCenter,
                               child: NextBar(

@@ -13,7 +13,7 @@ class FlashCardApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(720, 1600),
+      designSize: const Size(480, 1070),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {

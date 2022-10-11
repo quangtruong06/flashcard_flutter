@@ -1,4 +1,3 @@
-
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +29,7 @@ class _NextBarState extends State<NextBar> with TickerProviderStateMixin {
     animation = Tween<double>(begin: 0.0, end: 1.0).animate(controller);
     super.initState();
   }
+
   @override
   void dispose() {
     controller.dispose();
@@ -38,6 +38,7 @@ class _NextBarState extends State<NextBar> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
     if (widget.isNext == true) {
       controller.forward();
       controller.addStatusListener((status) {
@@ -58,7 +59,7 @@ class _NextBarState extends State<NextBar> with TickerProviderStateMixin {
                     widget.isNext ? Colors.blue : Colors.blue.withOpacity(0.7),
                 // backgroundColor: widget.isNext? Colors.blue : const Color(0xFF003060).withOpacity(0.3),
                 value: animation.value,
-                minHeight: 50,
+                minHeight: height / 17,
                 color: const Color(0xFF003060).withOpacity(0.3),
               ),
               Positioned.fill(

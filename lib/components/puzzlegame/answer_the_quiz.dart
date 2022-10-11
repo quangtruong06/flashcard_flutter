@@ -106,13 +106,17 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
   }
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var puzzleHeight = size.height/20;
+    var puzzleWidth = size.width/13;
+
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Wrap(
-            spacing: 10,
-            runSpacing: 8,
+            spacing: 8,
+            runSpacing: 3,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
             children: List.generate(widget.trueAnswer.trim().split("").length,
@@ -132,8 +136,8 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                   child: Card(
                     child: animation.value < 0.5
                         ? Container(
-                      height: 35,
-                      width: 30,
+                      height: puzzleHeight,
+                      width: puzzleWidth,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(3),
@@ -149,8 +153,8 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           ]),
                     )
                         : Container(
-                      height: 35,
-                      width: 30,
+                      height: puzzleHeight,
+                      width: puzzleWidth,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(3),
@@ -200,8 +204,8 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Wrap(
-            spacing: 10,
-            runSpacing: 8,
+            spacing: 8,
+            runSpacing: 5,
             alignment: WrapAlignment.center,
             direction: Axis.horizontal,
             children: List.generate(quizRandomAlphabet.length, (index) {
@@ -231,8 +235,8 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                   duration: const Duration(milliseconds: 300),
                   opacity: quizRandomAlphabet[index] == "" ? 0 : 1.0,
                   child: Container(
-                    height: 35,
-                    width: 25,
+                    height: puzzleHeight,
+                    width: puzzleWidth,
                     decoration: BoxDecoration(
                         color: const Color(0xFF145DA0),
                         borderRadius: BorderRadius.circular(3),
