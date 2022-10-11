@@ -132,7 +132,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                   child: Card(
                     child: animation.value < 0.5
                         ? Container(
-                      height: 40,
+                      height: 35,
                       width: 30,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -149,7 +149,7 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                           ]),
                     )
                         : Container(
-                      height: 40,
+                      height: 35,
                       width: 30,
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -231,8 +231,8 @@ class _PlayQuizState extends State<PlayQuiz> with TickerProviderStateMixin {
                   duration: const Duration(milliseconds: 300),
                   opacity: quizRandomAlphabet[index] == "" ? 0 : 1.0,
                   child: Container(
-                    height: 40,
-                    width: 30,
+                    height: 35,
+                    width: 25,
                     decoration: BoxDecoration(
                         color: const Color(0xFF145DA0),
                         borderRadius: BorderRadius.circular(3),

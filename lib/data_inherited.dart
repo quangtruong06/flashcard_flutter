@@ -1,4 +1,3 @@
-import 'package:flashcard_flutter/save/shared_prefence.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -49,6 +48,7 @@ class _AppScoreDataState extends State<AppScoreData> {
       appScoreData["PuzzleGame"] = puzzleGameScore;
     });
   }
+
   @override
   void initState() {
     super.initState();

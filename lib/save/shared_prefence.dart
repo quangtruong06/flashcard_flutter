@@ -9,5 +9,4 @@ Future<void> setGameScore(Map yourScore) async {
     var jsondata = prefs.getString("gamescore")!;
     return json.decode(jsondata);
   }
-  print(prefs.getString("gamescore"));
 }
