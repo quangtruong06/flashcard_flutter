@@ -63,7 +63,7 @@ class _LastPageState extends State<LastPage> {
             const SizedBox(height: 20,),
             InkWell(
               onTap: (){
-                Navigator.pop(context);
+                Navigator.of(context).pop(true);
               },
               child: Container(
                 height: 40,

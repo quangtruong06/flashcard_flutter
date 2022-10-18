@@ -37,7 +37,6 @@ class _CardGameBodyState extends State<CardGameBody> {
   Widget build(BuildContext context) {
     // var scoreData = AppScoreDataInherited.of(context)!.appScore;
     return BlocBuilder<ScoreCubit,dynamic>(builder: (context,state){
-      print("aaaaaaaaa$state");
       return FutureBuilder<List<CardModel>>(
           future: cardData,
           builder: (context, snapshot) {

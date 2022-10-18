@@ -71,7 +71,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                 children: [
                                   BlocBuilder<ScoreCubit,dynamic>(
                                       builder: (BuildContext context, state) {
-                                        double score = (state!["WordGame"]+state["PuzzleGame"])/2*5;
+                                        double score = (state["WordGame"]+state["PuzzleGame"])/2*5;
                                         return MyRatingBar(itemSize: 20.0, rating: score);
                                       },),
                                   const SizedBox(height: defaultPadding),
