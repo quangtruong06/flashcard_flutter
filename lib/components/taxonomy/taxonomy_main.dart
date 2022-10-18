@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
 import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
@@ -7,6 +8,7 @@ import 'package:flashcard_flutter/screens/CardScreen.dart';
 import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../share_widgets/rating_bar.dart';
 
 class TaxonomyBody extends StatefulWidget {
@@ -27,8 +29,10 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
 
   @override
   Widget build(BuildContext context) {
+    /*
+  }
     var data = AppScoreDataInherited.of(context)!.appScore;
-    double score = (data["WordGame"] + data["PuzzleGame"]) / 2 * 5;
+    double score = (data["WordGame"] + data["PuzzleGame"]) / 2 * 5; */
     return Container(
       padding: const EdgeInsets.all(defaultPadding),
       color: const Color(0xFFD5D8DC),
@@ -65,7 +69,11 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  MyRatingBar(itemSize: 20.0, rating: score),
+                                  BlocBuilder<ScoreCubit,dynamic>(
+                                      builder: (BuildContext context, state) {
+                                        double score = (state!["WordGame"]+state["PuzzleGame"])/2*5;
+                                        return MyRatingBar(itemSize: 20.0, rating: score);
+                                      },),
                                   const SizedBox(height: defaultPadding),
                                   CachedNetworkImage(
                                     imageUrl: data[index].imageUrl!,

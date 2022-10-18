@@ -1,8 +1,7 @@
-import 'package:flashcard_flutter/data_inherited.dart';
+import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
 import 'package:flashcard_flutter/screens/TaxonomyScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   runApp(const FlashCardApp());
 }
@@ -12,18 +11,14 @@ class FlashCardApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(480, 1070),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) {
-        return const AppScoreData(
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Taxonomy(),
-          )
-        );
+    return  BlocProvider(
+      create: (BuildContext context) {
+        return ScoreCubit();
       },
+      child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Taxonomy()
+          ),
     );
   }
 }

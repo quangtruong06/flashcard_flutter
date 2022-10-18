@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+//this inheritedWidget is unused , now use Bloc
 class AppScoreDataInherited extends InheritedWidget {
   final dynamic appScore;
   final void Function(double) setWordGameScore;
