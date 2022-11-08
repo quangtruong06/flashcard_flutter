@@ -21,6 +21,7 @@ class _PlayRecordState extends State<PlayRecord> with TickerProviderStateMixin {
     recordAnimate = Tween<double>(begin: 50, end: 65).animate(controller);
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -39,13 +40,12 @@ class _PlayRecordState extends State<PlayRecord> with TickerProviderStateMixin {
               if (controller.isCompleted) {
                 controller.reverse();
               }
-              if (controller.isDismissed){
+              if (controller.isDismissed) {
                 controller.forward();
               }
             });
           },
-          child: Stack(
-              children: [
+          child: Stack(children: [
             AnimatedBuilder(
               animation: controller,
               builder: (BuildContext context, Widget? child) {

@@ -2,8 +2,6 @@ import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../data_inherited.dart';
 import '../../utils/Globals.dart';
 import '../../utils/Utils.dart';
 import '../share_widgets/lastpage.dart';
@@ -64,7 +62,7 @@ class _WordGameBodyState extends State<WordGameBody> {
   Widget build(BuildContext context) {
     return PageView.builder(
       controller: _pageController,
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
         nextPage() {
           _pageController.animateToPage(_pageController.page!.toInt() + 1,
@@ -77,10 +75,7 @@ class _WordGameBodyState extends State<WordGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          context.read<ScoreCubit>().setWordGame(data.score()!);
-          // Future(() async {
-          //   AppScoreDataInherited.of(context)!.setWordGameScore(data.score()!);
-          // });
+          context.read<ScoreCubit>().setWordGame(0.3);
           return LastPage(
               restartGame: restartGame,
               title: data.title,

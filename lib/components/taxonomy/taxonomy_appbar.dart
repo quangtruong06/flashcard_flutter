@@ -1,8 +1,7 @@
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 
-class TaxonomyAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class TaxonomyAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TaxonomyAppBar({Key? key})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);

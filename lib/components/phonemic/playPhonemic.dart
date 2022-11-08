@@ -4,6 +4,7 @@ import 'dart:math';
 
 import '../../models/cardgame_model.dart';
 import '../../utils/Utils.dart';
+
 class PlayPhonemic extends StatefulWidget {
   final CardModel phonemicData;
 
@@ -25,6 +26,7 @@ class _PlayPhonemicState extends State<PlayPhonemic>
     var url = widget.phonemicData.mediaUrl;
     await player.setUrl(url!);
   }
+
   @override
   void initState() {
     controller = AnimationController(
@@ -41,7 +43,8 @@ class _PlayPhonemicState extends State<PlayPhonemic>
     controller.dispose();
     player.stop();
   }
-  void playPhonemic(){
+
+  void playPhonemic() {
     controller.forward();
     controller.addStatusListener((status) {
       if (controller.isCompleted) {
@@ -52,7 +55,7 @@ class _PlayPhonemicState extends State<PlayPhonemic>
         player.playbackEventStream.listen((event) {
           if (event.processingState == ProcessingState.completed) {
             controller.reverse();
-            controller.addStatusListener((status){
+            controller.addStatusListener((status) {
               if (controller.value < 0.8) {
                 setState(() {
                   isPlay = false;
@@ -65,6 +68,7 @@ class _PlayPhonemicState extends State<PlayPhonemic>
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

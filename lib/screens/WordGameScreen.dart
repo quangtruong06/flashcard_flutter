@@ -2,6 +2,7 @@ import 'package:flashcard_flutter/components/share_widgets/share_appbar.dart';
 import 'package:flashcard_flutter/components/wordgame/wordgame_main.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flutter/material.dart';
+
 class WordGame extends StatelessWidget {
   final String cardType;
   final List<CardModel> cardData;
@@ -12,9 +13,13 @@ class WordGame extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: ShareAppBar(title: cardType,
+      appBar: ShareAppBar(
+        title: cardType,
       ),
-      body: WordGameBody(size: size,cardData: cardData,),
+      body: WordGameBody(
+        size: size,
+        cardData: cardData,
+      ),
     );
   }
 }

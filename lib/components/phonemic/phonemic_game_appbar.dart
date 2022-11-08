@@ -1,9 +1,7 @@
-
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 
-class PhonemicGameAppBar extends StatefulWidget
-    implements PreferredSizeWidget {
+class PhonemicGameAppBar extends StatefulWidget implements PreferredSizeWidget {
   const PhonemicGameAppBar({Key? key, required this.cardType})
       : preferredSize = const Size.fromHeight(kToolbarHeight),
         super(key: key);
@@ -52,13 +50,13 @@ class _PhonemicGameAppBarState extends State<PhonemicGameAppBar> {
             },
             icon: isFavorite
                 ? const Icon(
-              Icons.star,
-              size: 30,
-            )
+                    Icons.star,
+                    size: 30,
+                  )
                 : const Icon(
-              Icons.star_border_sharp,
-              size: 30,
-            ))
+                    Icons.star_border_sharp,
+                    size: 30,
+                  ))
       ],
     );
   }

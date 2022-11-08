@@ -16,7 +16,10 @@ class PhonemicGame extends StatelessWidget {
       appBar: PhonemicGameAppBar(
         cardType: cardType,
       ),
-      body: PhonemicGameBody(cardData: cardData, size: size,),
+      body: PhonemicGameBody(
+        cardData: cardData,
+        size: size,
+      ),
     );
   }
 }

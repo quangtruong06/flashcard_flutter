@@ -15,11 +15,14 @@ Future<List<TaxonomyModel>> getTaxonomiesFromApi() async {
     throw Exception("Data not found");
   }
 }
+
 Future<List<CardModel>> getCardDataFromAPI(int id) async {
   final respone = await http.get(Uri.parse("$API_CARDDATA$id"));
   if (respone.statusCode == 200) {
     var data = json.decode(respone.body);
-    var rs = (data["flashCards"] as List).map((json) => CardModel.fromJson(json)).toList();
+    var rs = (data["flashCards"] as List)
+        .map((json) => CardModel.fromJson(json))
+        .toList();
     return rs;
   } else {
     throw Exception("Data not found");

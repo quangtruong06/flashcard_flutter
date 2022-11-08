@@ -37,11 +37,12 @@ class TaxonomyDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: 80,
-                      height: 80,
-                      child: Image.asset("assets/images/appicon.png",fit: BoxFit.fill,)
-
-                    ),
+                        width: 80,
+                        height: 80,
+                        child: Image.asset(
+                          "assets/images/appicon.png",
+                          fit: BoxFit.fill,
+                        )),
                     Utils.customText(
                         text: "My FlashCards App",
                         color: Colors.white,

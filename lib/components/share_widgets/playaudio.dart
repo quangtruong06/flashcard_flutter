@@ -11,7 +11,8 @@ class AnimatedPlayAudio extends StatefulWidget {
   State<AnimatedPlayAudio> createState() => _AnimatedPlayAudio();
 }
 
-class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderStateMixin {
+class _AnimatedPlayAudio extends State<AnimatedPlayAudio>
+    with TickerProviderStateMixin {
   final player = AudioPlayer();
   final angle = 180 * pi / 180;
   bool isPlay = false;
@@ -20,6 +21,7 @@ class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderSta
   init() async {
     await player.setUrl(widget.url);
   }
+
   @override
   void initState() {
     controller = AnimationController(
@@ -37,7 +39,8 @@ class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderSta
     player.stop();
     player.dispose();
   }
-  void playPhonemic(){
+
+  void playPhonemic() {
     controller.forward();
     controller.addStatusListener((status) {
       if (controller.isCompleted) {
@@ -48,7 +51,7 @@ class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderSta
         player.playbackEventStream.listen((event) {
           if (event.processingState == ProcessingState.completed) {
             controller.reverse();
-            controller.addStatusListener((status){
+            controller.addStatusListener((status) {
               if (controller.value < 0.8) {
                 setState(() {
                   isPlay = false;
@@ -61,6 +64,7 @@ class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderSta
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -78,15 +82,15 @@ class _AnimatedPlayAudio extends State<AnimatedPlayAudio> with TickerProviderSta
           },
           child: isPlay
               ? const Icon(
-            Icons.pause,
-            size: 35,
-            color: Colors.white,
-          )
+                  Icons.pause,
+                  size: 35,
+                  color: Colors.white,
+                )
               : const Icon(
-            Icons.volume_up,
-            size: 35,
-            color: Colors.white,
-          ),
+                  Icons.volume_up,
+                  size: 35,
+                  color: Colors.white,
+                ),
         ),
       ),
     );

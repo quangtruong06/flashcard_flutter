@@ -1,3 +1,4 @@
+import 'package:flashcard_flutter/bloc/taxonomy_bloc/taxonomy_bloc.dart';
 import 'package:flashcard_flutter/components/cardgames/cardgame_main.dart';
 
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import '../models/TaxonomyModel.dart';
 import '../utils/Utils.dart';
 
 class CardGamePage extends StatelessWidget {
-  final TaxonomyModel data;
+  final TaxonomyData data;
 
   const CardGamePage({Key? key, required this.data}) : super(key: key);
 

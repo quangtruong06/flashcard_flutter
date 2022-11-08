@@ -4,7 +4,8 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class MyRatingBar extends StatelessWidget {
   final double? itemSize;
   final double? rating;
-  const MyRatingBar({Key? key,required this.itemSize,required this.rating}) : super(key: key);
+  const MyRatingBar({Key? key, required this.itemSize, required this.rating})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

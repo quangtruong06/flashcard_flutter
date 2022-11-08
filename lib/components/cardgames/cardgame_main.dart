@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
 import 'package:flashcard_flutter/components/share_widgets/rating_bar.dart';
-import 'package:flashcard_flutter/data_inherited.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
@@ -13,10 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/taxonomy_bloc/taxonomy_bloc.dart';
 import '../../screens/PhonemicScreen.dart';
 
 class CardGameBody extends StatefulWidget {
-  final TaxonomyModel data;
+  final TaxonomyData data;
 
   const CardGameBody({Key? key, required this.data}) : super(key: key);
 
@@ -35,8 +35,7 @@ class _CardGameBodyState extends State<CardGameBody> {
 
   @override
   Widget build(BuildContext context) {
-    // var scoreData = AppScoreDataInherited.of(context)!.appScore;
-    return BlocBuilder<ScoreCubit,dynamic>(builder: (context,state){
+    return BlocBuilder<ScoreCubit, dynamic>(builder: (context, state) {
       return FutureBuilder<List<CardModel>>(
           future: cardData,
           builder: (context, snapshot) {
@@ -82,8 +81,8 @@ class _CardGameBodyState extends State<CardGameBody> {
                       enableInfiniteScroll: false,
                       autoPlayCurve: Curves.fastOutSlowIn,
                     ),
-                    itemBuilder:
-                        (BuildContext context, int itemIndex, int pageViewIndex) {
+                    itemBuilder: (BuildContext context, int itemIndex,
+                        int pageViewIndex) {
                       return Builder(
                         builder: (BuildContext context) {
                           return GestureDetector(
@@ -96,7 +95,7 @@ class _CardGameBodyState extends State<CardGameBody> {
                             child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 margin:
-                                const EdgeInsets.symmetric(horizontal: 5.0),
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
@@ -119,19 +118,20 @@ class _CardGameBodyState extends State<CardGameBody> {
                                     ),
                                     itemIndex == 0
                                         ? CachedNetworkImage(
-                                      imageUrl: data[0]["img"],
-                                      width: 200,
-                                      height: 200,
-                                      fit: BoxFit.fill,
-                                      errorWidget: (context, url, error) =>
-                                      const Icon(Icons.error),
-                                    )
+                                            imageUrl: data[0]["img"],
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.fill,
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    const Icon(Icons.error),
+                                          )
                                         : Image.asset(
-                                      data[itemIndex]["img"],
-                                      width: 200,
-                                      height: 200,
-                                      fit: BoxFit.fill,
-                                    ),
+                                            data[itemIndex]["img"],
+                                            width: 200,
+                                            height: 200,
+                                            fit: BoxFit.fill,
+                                          ),
                                     const SizedBox(
                                       height: 30.0,
                                     ),
@@ -149,26 +149,26 @@ class _CardGameBodyState extends State<CardGameBody> {
             } else {
               return Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/images/smile_1.png",
-                        width: 150,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 16.0),
-                        child: CircularProgressIndicator(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: Utils.customText(
-                            text: "Loading Data...",
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF3254AC)),
-                      )
-                    ],
-                  ));
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/smile_1.png",
+                    width: 150,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 16.0),
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Utils.customText(
+                        text: "Loading Data...",
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF3254AC)),
+                  )
+                ],
+              ));
             }
           });
     });

@@ -12,27 +12,38 @@ class ShareAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
         backgroundColor: const Color(0xFF3254AC),
         leading: IconButton(
-            onPressed: (){
-            // Navigator.pop(context);
-              showDialog(barrierDismissible: false,context: context, builder: (_){
-                return AlertDialog(
-                  title: Utils.customText(text: "Bạn có chắc chắn muốn thoát?",fontWeight: FontWeight.bold,size: 20.0),
-                  content: Utils.customText(text: "Thoát sẽ không được tính điểm",fontWeight: FontWeight.bold,size: 16.0),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'Cancel'),
-                      child: Utils.customText(text: "Chơi tiếp",color: Colors.blue),
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      },
-                      child: Utils.customText(text: "Thoát ra",color: Colors.red),
-                    ),
-                  ],
-                );
-              });
+            onPressed: () {
+              // Navigator.pop(context);
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (_) {
+                    return AlertDialog(
+                      title: Utils.customText(
+                          text: "Bạn có chắc chắn muốn thoát?",
+                          fontWeight: FontWeight.bold,
+                          size: 20.0),
+                      content: Utils.customText(
+                          text: "Thoát sẽ không được tính điểm",
+                          fontWeight: FontWeight.bold,
+                          size: 16.0),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: Utils.customText(
+                              text: "Chơi tiếp", color: Colors.blue),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                          },
+                          child: Utils.customText(
+                              text: "Thoát ra", color: Colors.red),
+                        ),
+                      ],
+                    );
+                  });
             },
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,

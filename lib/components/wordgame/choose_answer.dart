@@ -41,6 +41,7 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
       widget.checkResult(theSelect[tappedIndex!] == widget.trueSelect);
     }
   }
+
   //lấy 3 ảnh random
   getRandomImage() {
     theSelect = [];
@@ -56,6 +57,7 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
     // print(object)
     theSelect.shuffle();
   }
+
   double showYourResult(int yourSelect) {
     if (theSelect[yourSelect] == widget.trueSelect) {
       return isShowResult ? 1.0 : 0.0;
@@ -67,6 +69,7 @@ class _ChooseTheAnswerState extends State<ChooseTheAnswer> {
           : 0.0;
     }
   }
+
   //hiển thị widget đúng hoặc sai
   Widget resultIcon(int yourSelect) {
     if (theSelect[yourSelect] == widget.trueSelect) {

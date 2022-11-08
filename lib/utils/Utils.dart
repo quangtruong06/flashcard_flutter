@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 class Utils {
-  static Widget customText({
-    text = "",
-    color = Colors.black87,
-    size = 16.0,
-    fontWeight = FontWeight.normal,
-    line = 3,
-    textAlign = TextAlign.left,
-    decoration = TextDecoration.none,
-    fontStyle=FontStyle.normal
-  }) {
+  static Widget customText(
+      {text = "",
+      color = Colors.black87,
+      size = 16.0,
+      fontWeight = FontWeight.normal,
+      line = 3,
+      textAlign = TextAlign.left,
+      decoration = TextDecoration.none,
+      fontStyle = FontStyle.normal}) {
     return Text(
       text,
       style: TextStyle(
@@ -28,22 +27,24 @@ class Utils {
   }
 }
 
-class PlayAudio{
+class PlayAudio {
   final player = AudioPlayer();
-  void playAudioResult(bool yourResult){
-    if(yourResult==true){
+  void playAudioResult(bool yourResult) {
+    if (yourResult == true) {
       player.setAsset("assets/audios/exactly.mp3");
       player.play();
-    }else{
+    } else {
       player.setAsset("assets/audios/fail.mp3");
       player.play();
     }
   }
-  void playAudioLastPage(){
+
+  void playAudioLastPage() {
     player.setAsset("assets/audios/levelpassed.mp3");
     player.play();
   }
-  void tapAudio(){
+
+  void tapAudio() {
     player.setAsset("assets/audios/tapaudio.mp3");
     player.play();
   }

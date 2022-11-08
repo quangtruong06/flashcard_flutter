@@ -7,13 +7,15 @@ import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
 class PhonemicGameBody extends StatelessWidget {
   final Size size;
   final List<CardModel> cardData;
   final CarouselController buttonCarouselController = CarouselController();
-  restartGame(){
+  restartGame() {
     buttonCarouselController.jumpToPage(0);
   }
+
   PhonemicGameBody({Key? key, required this.size, required this.cardData})
       : super(key: key);
 
@@ -34,25 +36,30 @@ class PhonemicGameBody extends StatelessWidget {
           itemBuilder: (BuildContext context, int index, int realIndex) {
             return Builder(
               builder: (BuildContext context) {
-                if(index==cardData.length){
+                if (index == cardData.length) {
                   final PhonemicLastPageData data = PhonemicLastPageData();
-                  return LastPage(title: data.tittle, imageSrc: data.imageSrc, description: data.description,restartGame: restartGame);
-                }
-                else{
+                  return LastPage(
+                      title: data.tittle,
+                      imageSrc: data.imageSrc,
+                      description: data.description,
+                      restartGame: restartGame);
+                } else {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 16),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(color: Colors.black26),
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.black26),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 6,
                             blurRadius: 10,
-                            offset: const Offset(5, 3), // changes position of shadow
+                            offset: const Offset(
+                                5, 3), // changes position of shadow
                           ),
                         ],
                       ),
@@ -64,7 +71,8 @@ class PhonemicGameBody extends StatelessWidget {
                             height: size.height / 2.5,
                             child: CachedNetworkImage(
                               imageUrl: cardData[index].imageUrl!,
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
                             ),
                           ),
                           PlayPhonemic(phonemicData: cardData[index]),
@@ -83,10 +91,9 @@ class PhonemicGameBody extends StatelessWidget {
               },
             );
           },
-          itemCount: cardData.length+1,
+          itemCount: cardData.length + 1,
         ),
       ],
     );
   }
 }
-
