@@ -4,9 +4,10 @@ import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flutter/material.dart';
 
 class WordGame extends StatelessWidget {
+  final int index;
   final String cardType;
   final List<CardModel> cardData;
-  const WordGame({Key? key, required this.cardType, required this.cardData})
+  const WordGame({Key? key, required this.cardType, required this.cardData, required this.index})
       : super(key: key);
 
   @override
@@ -18,7 +19,7 @@ class WordGame extends StatelessWidget {
       ),
       body: WordGameBody(
         size: size,
-        cardData: cardData,
+        cardData: cardData, index: index,
       ),
     );
   }

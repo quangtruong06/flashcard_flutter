@@ -1,16 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
-import 'package:flashcard_flutter/bloc/taxonomy_bloc/taxonomy_bloc.dart';
-import 'package:flashcard_flutter/bloc/taxonomy_bloc/taxonomy_event.dart';
-import 'package:flashcard_flutter/bloc/taxonomy_bloc/taxonomy_state.dart';
-import 'package:flashcard_flutter/models/TaxonomyModel.dart';
-import 'package:flashcard_flutter/network/response_api.dart';
 import 'package:flashcard_flutter/components/share_widgets/route_transition.dart';
 import 'package:flashcard_flutter/screens/CardScreen.dart';
 import 'package:flashcard_flutter/utils/Globals.dart';
 import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../models/TaxonomyModel.dart';
+import '../../network/response_api.dart';
 import '../share_widgets/rating_bar.dart';
 
 class TaxonomyBody extends StatefulWidget {
@@ -21,83 +18,45 @@ class TaxonomyBody extends StatefulWidget {
   @override
   State<TaxonomyBody> createState() => _TaxonomyBodyState();
 }
-
 class _TaxonomyBodyState extends State<TaxonomyBody> {
-  // late Future<List<TaxonomyModel>> taxonomy;
-  final scrollController = ScrollController();
+  late Future<List<TaxonomyModel>> taxonomy;
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
-    scrollController
-      ..removeListener(onScroll)
-      ..dispose();
   }
 
   @override
   void initState() {
-    // taxonomy = getTaxonomiesFromApi();
+    taxonomy = getTaxonomiesFromApi();
     super.initState();
-    scrollController.addListener(onScroll);
-  }
-
-  bool get _isBottom {
-    if (!scrollController.hasClients) return false;
-    final maxScroll = scrollController.position.maxScrollExtent;
-    final currentScroll = scrollController.offset;
-    return currentScroll >= (maxScroll * 0.8);
-  }
-
-  void onScroll() {
-    if (_isBottom) context.read<TaxonomyBloc>().add(TaxonomyFetched());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TaxonomyBloc, TaxonomyState>(builder: (context, state) {
-      final data = state.taxonomy;
-      switch (state.status) {
-        case TaxnomomyStatus.initial:
-          return Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/smile_1.png",
-                width: 150,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 16.0),
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Utils.customText(
-                    text: "Loading Data...",
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF3254AC)),
-              )
-            ],
-          ));
-        case TaxnomomyStatus.success:
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio:
-                    (widget.size.width / 2 - 48) / (widget.size.height / 3.5)),
-            itemBuilder: (context, index) {
-              return index >= state.taxonomy.length
-                  ? const BottomLoader()
-                  : GestureDetector(
+    return FutureBuilder<List<TaxonomyModel>>(
+        future: taxonomy,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final List data = snapshot.data!;
+            context.read<ScoreCubit>().setScoreLength(data.length);
+            return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 8,
+                    crossAxisSpacing: 8,
+                    childAspectRatio: (widget.size.width / 2 - 48) /
+                        (widget.size.height / 3.5)),
+                itemBuilder: (context, index) {
+                  return GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             SlideRightRoute(
-                                page: CardGamePage(data: data[index])));
+                                page: CardGamePage(
+                              data: data[index]!,
+                              index: index,
+                            )));
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -114,8 +73,8 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                 children: [
                                   BlocBuilder<ScoreCubit, dynamic>(
                                       builder: (BuildContext context, state) {
-                                    double score = (state["WordGame"] +
-                                            state["PuzzleGame"]) /
+                                    double score = (state[index]["WordGame"] +
+                                            state[index]["PuzzleGame"]) /
                                         2 *
                                         5;
                                     return MyRatingBar(
@@ -155,31 +114,32 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                           ],
                         ),
                       ));
-            },
-            itemCount: state.hasReachedMax
-                ? state.taxonomy.length
-                : state.taxonomy.length + 1,
-            controller: scrollController,
-          );
-
-        case TaxnomomyStatus.failure:
-          return const Center(child: Text('failed to fetch posts'));
-      }
-    });
-  }
-}
-
-class BottomLoader extends StatelessWidget {
-  const BottomLoader({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: SizedBox(
-        height: 24,
-        width: 24,
-        child: CircularProgressIndicator(strokeWidth: 1.5),
-      ),
-    );
+                },
+                itemCount: data.length);
+          } else {
+            return Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/smile_1.png",
+                  width: 150,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: CircularProgressIndicator(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Utils.customText(
+                      text: "Loading Data...",
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF3254AC)),
+                )
+              ],
+            ));
+          }
+        });
   }
 }

@@ -11,16 +11,15 @@ import '../share_widgets/score_dot.dart';
 import 'choose_answer.dart';
 
 class WordGameBody extends StatefulWidget {
+  final int index;
   final Size size;
   final List<CardModel> cardData;
-
-  const WordGameBody({Key? key, required this.size, required this.cardData})
+  const WordGameBody({Key? key, required this.size, required this.cardData, required this.index})
       : super(key: key);
 
   @override
   State<WordGameBody> createState() => _WordGameBodyState();
 }
-
 class _WordGameBodyState extends State<WordGameBody> {
   List<bool> scoreDots = [];
   final PageController _pageController = PageController();
@@ -75,7 +74,7 @@ class _WordGameBodyState extends State<WordGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          context.read<ScoreCubit>().setWordGame(0.3);
+          context.read<ScoreCubit>().setWordGame(0.3,widget.index);
           return LastPage(
               restartGame: restartGame,
               title: data.title,

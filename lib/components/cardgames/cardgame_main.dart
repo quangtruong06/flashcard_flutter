@@ -11,19 +11,16 @@ import 'package:flashcard_flutter/utils/Utils.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../bloc/taxonomy_bloc/taxonomy_bloc.dart';
 import '../../screens/PhonemicScreen.dart';
 
 class CardGameBody extends StatefulWidget {
-  final TaxonomyData data;
-
-  const CardGameBody({Key? key, required this.data}) : super(key: key);
+  final TaxonomyModel data;
+  final int index;
+  const CardGameBody({Key? key, required this.data, required this.index}) : super(key: key);
 
   @override
   State<CardGameBody> createState() => _CardGameBodyState();
 }
-
 class _CardGameBodyState extends State<CardGameBody> {
   Future<List<CardModel>>? cardData;
 
@@ -55,18 +52,18 @@ class _CardGameBodyState extends State<CardGameBody> {
                   "img": "assets/images/word_game.png",
                   "nextpage": WordGame(
                     cardType: widget.data.name!,
-                    cardData: carddata,
+                    cardData: carddata, index: widget.index,
                   ),
-                  "Score": state["WordGame"]
+                  "Score": state[widget.index]["WordGame"]
                 },
                 {
                   "name": "Puzzle Game",
                   "img": "assets/images/puzzle_game.png",
                   "nextpage": PuzzleGame(
                     cardType: widget.data.name!,
-                    cardData: carddata,
+                    cardData: carddata, index: widget.index,
                   ),
-                  "Score": state["PuzzleGame"]
+                  "Score": state[widget.index]["PuzzleGame"]
                 }
               ];
               return Center(

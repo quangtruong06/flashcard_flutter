@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 class PuzzleGame extends StatelessWidget {
   final String cardType;
   final List<CardModel> cardData;
+  final int index;
 
-  const PuzzleGame({Key? key, required this.cardType, required this.cardData})
+  const PuzzleGame({Key? key, required this.cardType, required this.cardData, required this.index})
       : super(key: key);
 
   @override
@@ -17,6 +18,6 @@ class PuzzleGame extends StatelessWidget {
         appBar: ShareAppBar(
           title: cardType,
         ),
-        body: PuzzleGameBody(size: size, cardData: cardData));
+        body: PuzzleGameBody(size: size, cardData: cardData, index: index,));
   }
 }

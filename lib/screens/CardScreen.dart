@@ -1,16 +1,13 @@
-import 'package:flashcard_flutter/bloc/taxonomy_bloc/taxonomy_bloc.dart';
 import 'package:flashcard_flutter/components/cardgames/cardgame_main.dart';
+import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 
 import 'package:flutter/material.dart';
-
-import '../models/TaxonomyModel.dart';
 import '../utils/Utils.dart';
 
 class CardGamePage extends StatelessWidget {
-  final TaxonomyData data;
-
-  const CardGamePage({Key? key, required this.data}) : super(key: key);
-
+  final TaxonomyModel data;
+  final int index;
+  const CardGamePage({Key? key, required this.data, required this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +35,7 @@ class CardGamePage extends StatelessWidget {
             ),
           )),
       body: CardGameBody(
-        data: data,
+        data: data, index: index,
       ),
     );
   }

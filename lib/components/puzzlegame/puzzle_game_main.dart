@@ -14,10 +14,11 @@ class PuzzleGameBody extends StatefulWidget {
   const PuzzleGameBody({
     Key? key,
     required this.size,
-    required this.cardData,
+    required this.cardData, required this.index,
   }) : super(key: key);
   final Size size;
   final List<CardModel> cardData;
+  final int index;
 
   @override
   State<PuzzleGameBody> createState() => _PuzzleGameBodyState();
@@ -76,7 +77,7 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          context.read<ScoreCubit>().setPuzzleGame(0.3);
+          context.read<ScoreCubit>().setPuzzleGame(0.3,index);
           // Future(() async {
           //   AppScoreDataInherited.of(context)!
           //       .setPuzzleGameScore(data.score()!);
