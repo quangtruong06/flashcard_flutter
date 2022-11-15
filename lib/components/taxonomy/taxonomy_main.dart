@@ -12,7 +12,6 @@ import '../share_widgets/rating_bar.dart';
 
 class TaxonomyBody extends StatefulWidget {
   final Size size;
-
   const TaxonomyBody({Key? key, required this.size}) : super(key: key);
 
   @override
@@ -20,7 +19,6 @@ class TaxonomyBody extends StatefulWidget {
 }
 class _TaxonomyBodyState extends State<TaxonomyBody> {
   late Future<List<TaxonomyModel>> taxonomy;
-
   @override
   void dispose() {
     super.dispose();

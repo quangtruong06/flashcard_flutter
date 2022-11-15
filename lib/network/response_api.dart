@@ -7,7 +7,6 @@ import '../models/TaxonomyModel.dart';
 
 Future<List<TaxonomyModel>> getTaxonomiesFromApi() async {
   final respone = await http.get(Uri.parse("https://vndoc.com/cards/api/taxonomies"));
-  print(respone.statusCode);
   if (respone.statusCode == 200) {
     List data = jsonDecode(respone.body);
     var rs = data.map((json) => TaxonomyModel.fromJson(json)).toList();
