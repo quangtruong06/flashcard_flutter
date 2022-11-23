@@ -13,14 +13,6 @@ class TaxonomyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: const Color(0xFF3254AC),
-        actions: [
-          IconButton(
-              onPressed: () => null,
-              icon: const Icon(
-                Icons.search_sharp,
-                size: 30,
-              )),
-        ],
         title: Utils.customText(
             text: "FlashCards",
             color: Colors.white,

@@ -77,11 +77,8 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          context.read<ScoreCubit>().setPuzzleGame(0.3,index);
-          // Future(() async {
-          //   AppScoreDataInherited.of(context)!
-          //       .setPuzzleGameScore(data.score()!);
-          // });
+          var score = data.score()!;
+          context.read<ScoreCubit>().setPuzzleGame(score,index);
           return LastPage(
               restartGame: restartGame,
               title: data.title,

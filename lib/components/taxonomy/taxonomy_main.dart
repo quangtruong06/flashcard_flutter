@@ -23,7 +23,6 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
   void dispose() {
     super.dispose();
   }
-
   @override
   void initState() {
     taxonomy = getTaxonomiesFromApi();
@@ -60,6 +59,14 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: const Offset(1,2), // changes position of shadow
+                            ),
+                          ]
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -73,10 +80,9 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                       builder: (BuildContext context, state) {
                                     double score = (state[index]["WordGame"] +
                                             state[index]["PuzzleGame"]) /
-                                        2 *
-                                        5;
+                                        2;
                                     return MyRatingBar(
-                                        itemSize: 20.0, rating: score);
+                                        itemSize: 20.0, rating: score*5);
                                   }),
                                   const SizedBox(height: defaultPadding),
                                   CachedNetworkImage(
@@ -93,22 +99,11 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                 ],
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Utils.customText(
-                                    text: "${data[index].totalFlashCards}"),
-                                const Padding(
-                                    padding: EdgeInsets.only(left: 4.0),
-                                    child: Icon(
-                                      Icons.cloud_download_outlined,
-                                      color: Colors.blue,
-                                    ))
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: defaultPadding),
+                              child: Utils.customText(
+                                  text: "Total Cards: ${data[index].totalFlashCards}",color: Colors.black,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),
                             ),
-                            const SizedBox(
-                              height: defaultPadding,
-                            )
                           ],
                         ),
                       ));
