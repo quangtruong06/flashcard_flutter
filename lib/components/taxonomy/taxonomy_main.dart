@@ -9,11 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/TaxonomyModel.dart';
 import '../../network/response_api.dart';
 import '../share_widgets/rating_bar.dart';
-
 class TaxonomyBody extends StatefulWidget {
   final Size size;
   const TaxonomyBody({Key? key, required this.size}) : super(key: key);
-
   @override
   State<TaxonomyBody> createState() => _TaxonomyBodyState();
 }
@@ -28,7 +26,6 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
     taxonomy = getTaxonomiesFromApi();
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<TaxonomyModel>>(
@@ -37,6 +34,7 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
           if (snapshot.hasData) {
             final List data = snapshot.data!;
             context.read<ScoreCubit>().setScoreLength(data.length);
+            context.read<ScoreCubit>().listTotalScore();
             return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -77,10 +75,8 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   BlocBuilder<ScoreCubit, dynamic>(
-                                      builder: (BuildContext context, state) {
-                                    double score = (state[index]["WordGame"] +
-                                            state[index]["PuzzleGame"]) /
-                                        2;
+                                      builder: (BuildContext context, state){
+                                    double score = context.read<ScoreCubit>().totalScores[index];
                                     return MyRatingBar(
                                         itemSize: 20.0, rating: score*5);
                                   }),
