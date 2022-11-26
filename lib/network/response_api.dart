@@ -6,19 +6,24 @@ import 'package:http/http.dart' as http;
 import '../models/TaxonomyModel.dart';
 
 Future<List<TaxonomyModel>> getTaxonomiesFromApi() async {
-  final respone = await http.get(Uri.parse(API_TAXONOMIES));
-  print("aaaaaaa${respone.statusCode}");
+  var respone = await http.get(Uri.parse(API_TAXONOMIES));
   if (respone.statusCode == 200) {
     List data = jsonDecode(respone.body);
     var rs = data.map((json) => TaxonomyModel.fromJson(json)).toList();
     return rs;
   } else {
+    respone = await http.get(Uri.parse("https://bookingmaster.site/json/taxonomies.json"));
+    if (respone.statusCode == 200) {
+      List data = jsonDecode(respone.body);
+      var rs = data.map((json) => TaxonomyModel.fromJson(json)).toList();
+      return rs;
+    }
     throw Exception("Data not found");
   }
 }
 
 Future<List<CardModel>> getCardDataFromAPI(int id) async {
-  final respone = await http.get(Uri.parse("$API_CARDDATA$id"));
+  var respone = await http.get(Uri.parse("$API_CARDDATA$id"));
   if (respone.statusCode == 200) {
     var data = json.decode(respone.body);
     var rs = (data["flashCards"] as List)
@@ -26,6 +31,15 @@ Future<List<CardModel>> getCardDataFromAPI(int id) async {
         .toList();
     return rs;
   } else {
+    var api = "https://bookingmaster.site/json/$id.json";
+    respone = await http.get(Uri.parse(api));
+    if (respone.statusCode == 200) {
+      var data = json.decode(respone.body);
+      var rs = (data["flashCards"] as List)
+          .map((json) => CardModel.fromJson(json))
+          .toList();
+      return rs;
+    }
     throw Exception("Data not found");
   }
 }
