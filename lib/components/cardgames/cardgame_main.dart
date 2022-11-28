@@ -54,7 +54,6 @@ class _CardGameBodyState extends State<CardGameBody> {
                     cardType: widget.data.name!,
                     cardData: carddata, index: widget.index,
                   ),
-                  "Score": state[widget.index]["WordGame"]
                 },
                 {
                   "name": "Puzzle Game",
@@ -63,7 +62,6 @@ class _CardGameBodyState extends State<CardGameBody> {
                     cardType: widget.data.name!,
                     cardData: carddata, index: widget.index,
                   ),
-                  "Score": state[widget.index]["PuzzleGame"]
                 }
               ];
               return Center(
@@ -106,13 +104,6 @@ class _CardGameBodyState extends State<CardGameBody> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    if (itemIndex != 0)
-                                      MyRatingBar(
-                                          itemSize: 25,
-                                          rating: data[itemIndex]["Score"] * 5),
-                                    const SizedBox(
-                                      height: 8.0,
-                                    ),
                                     itemIndex == 0
                                         ? CachedNetworkImage(
                                             imageUrl: data[0]["img"],
