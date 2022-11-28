@@ -74,8 +74,6 @@ class _WordGameBodyState extends State<WordGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          var score = data.score()!;
-          context.read<ScoreCubit>().setWordGame(score,widget.index);
           return LastPage(
               restartGame: restartGame,
               title: data.title,

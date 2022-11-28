@@ -77,8 +77,6 @@ class _PuzzleGameBodyState extends State<PuzzleGameBody> {
           GameLastPageData data =
               GameLastPageData(trueAnswerList.length, widget.cardData.length);
           data.loadData();
-          var score = data.score()!;
-          context.read<ScoreCubit>().setPuzzleGame(score,index);
           return LastPage(
               restartGame: restartGame,
               title: data.title,

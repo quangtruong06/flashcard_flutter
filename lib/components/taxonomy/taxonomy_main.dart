@@ -33,8 +33,6 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final List data = snapshot.data!;
-            context.read<ScoreCubit>().setScoreLength(data.length);
-            context.read<ScoreCubit>().listTotalScore();
             return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -74,12 +72,6 @@ class _TaxonomyBodyState extends State<TaxonomyBody> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  BlocBuilder<ScoreCubit, dynamic>(
-                                      builder: (BuildContext context, state){
-                                    double score = context.read<ScoreCubit>().totalScores[index];
-                                    return MyRatingBar(
-                                        itemSize: 20.0, rating: score*5);
-                                  }),
                                   const SizedBox(height: defaultPadding),
                                   CachedNetworkImage(
                                     imageUrl: data[index].imageUrl!,
