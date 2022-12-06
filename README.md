@@ -1,16 +1,8 @@
-# flashcard_flutter
+ファム　クアン　チュオン </br>
+Flutterで作成したフラッシュカードアプリです。</br>
+RestAPIを使ってデータを表示します。</br>
+こちらは最小の画面です：</br>
+<img src="https://user-images.githubusercontent.com/106483026/205782411-8705a967-0974-45b4-a85a-abe137165468.jpg" alt="" width="250" />
+</br>
+カードをタッチしてリストが出て来ます：
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
