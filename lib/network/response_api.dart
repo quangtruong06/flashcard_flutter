@@ -7,6 +7,7 @@ import '../models/TaxonomyModel.dart';
 
 Future<List<TaxonomyModel>> getTaxonomiesFromApi() async {
   var respone = await http.get(Uri.parse(API_TAXONOMIES));
+  print(respone.statusCode);
   if (respone.statusCode == 200) {
     List data = jsonDecode(respone.body);
     var rs = data.map((json) => TaxonomyModel.fromJson(json)).toList();

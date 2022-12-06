@@ -39,9 +39,10 @@ class _PlayPhonemicState extends State<PlayPhonemic>
 
   @override
   void dispose() {
-    super.dispose();
+
     controller.dispose();
     player.stop();
+    super.dispose();
   }
 
   void playPhonemic() {

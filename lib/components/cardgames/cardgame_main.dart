@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flashcard_flutter/bloc/appscore_cubit.dart';
-import 'package:flashcard_flutter/components/share_widgets/rating_bar.dart';
 import 'package:flashcard_flutter/models/TaxonomyModel.dart';
 import 'package:flashcard_flutter/models/cardgame_model.dart';
 import 'package:flashcard_flutter/network/response_api.dart';
