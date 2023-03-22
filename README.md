@@ -9,8 +9,7 @@ Androidダウンロードリンク：<a href="">Click here</a></br>
 IOS:ソースコードをダウンロードしてXcodeで発行します。
 </div>
 <p>こちらは初期画面です。</p>
-<img width="300" height="500" style="margin:8px auto;
-display:block;" src="https://user-images.githubusercontent.com/106483026/205782411-8705a967-0974-45b4-a85a-abe137165468.jpg">
+<img width="300" height="500" style="margin:8px 0px;" src="https://user-images.githubusercontent.com/106483026/205782411-8705a967-0974-45b4-a85a-abe137165468.jpg">
 <p>カードの種類がたくさんあります.</br>カードの種類が一つタップすると次の画面がでてきます</p>
 
 
