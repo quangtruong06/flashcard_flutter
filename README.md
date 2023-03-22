@@ -16,3 +16,9 @@ IOS:ソースコードをダウンロードしてXcodeで発行します。
 </div>
 
 https://user-images.githubusercontent.com/106483026/226919552-e3eaf1af-fd8b-49b9-a002-2a809eaf9755.MP4
+
+<h5>三つがあります：Cards,WordGame,PuzzleGame</h5>
+<p>一つずつは下のビデオのようです</p>
+
+Cards画面：
+https://user-images.githubusercontent.com/106483026/226923629-9f5ca473-2a6c-4f35-a8e4-2fc2af669b36.MOV
