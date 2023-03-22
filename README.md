@@ -14,5 +14,8 @@ IOS:ソースコードをダウンロードしてXcodeで発行します。
   <h5>カードの種類がたくさんあります</h5>
   <p>カードの種類が一つタップすると次の画面が出て来ます</p>
 </div>
-
+<video width="300" height="500" autoplay>
+  <source src="https://user-images.githubusercontent.com/106483026/226919552-e3eaf1af-fd8b-49b9-a002-2a809eaf9755.MP4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
