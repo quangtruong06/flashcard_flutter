@@ -8,4 +8,5 @@ OS: AndroidとIOS
 Androidダウンロードリンク：<a href="">Click here</a></br>
 IOS:ソースコードをダウンロードしてXcodeで発行します。
 </div>
-<img width="200" height="400" src="https://user-images.githubusercontent.com/106483026/205782411-8705a967-0974-45b4-a85a-abe137165468.jpg">
+<p>こちらは初期画面です。</p>
+<img width="300" height="400" style="margin-top:8px;" src="https://user-images.githubusercontent.com/106483026/205782411-8705a967-0974-45b4-a85a-abe137165468.jpg">
