@@ -36,4 +36,6 @@ https://user-images.githubusercontent.com/106483026/226925125-443442ab-99ec-4875
 https://user-images.githubusercontent.com/106483026/226926204-7bb9c493-4cad-4117-be92-881b5cbbf9a6.MP4
 
 WordGameとPuzzleGameの最後に結果が表示される：
+
+
 <img width="300" height="500" style="margin:8px 0px;" src="https://user-images.githubusercontent.com/106483026/226927920-cd8bd352-89ac-475b-8678-4d3f06bff8e6.PNG">
