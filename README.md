@@ -8,3 +8,4 @@ OS: AndroidとIOS
 Androidダウンロードリンク：<a href="">Click here</a></br>
 IOS:ソースコードをダウンロードしてXcodeで発行します。
 </div>
+<img src="https://github.com/quangtruong06/flashcard_flutter/issues/1">
